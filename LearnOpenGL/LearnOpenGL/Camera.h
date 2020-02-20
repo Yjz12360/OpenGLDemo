@@ -30,6 +30,8 @@ public:
 	glm::mat4 getViewMatrix();
 	glm::mat4 getProjMatrix();
 public:
+	void makeRotation(glm::mat4 rotation);
+
 	glm::vec3 cameraPos;
 	glm::vec3 cameraFront;
 	glm::vec3 cameraLeft;

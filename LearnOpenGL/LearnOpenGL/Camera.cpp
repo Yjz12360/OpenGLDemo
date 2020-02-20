@@ -15,7 +15,6 @@ Camera::Camera(glm::vec3 pos, glm::vec3 target):
 	glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
 	cameraLeft = glm::normalize(glm::cross(up, cameraFront));
 	cameraUp = glm::cross(cameraFront, cameraLeft);
-
 }
 
 Camera::Camera(glm::vec3 pos, glm::vec3 target, glm::vec3 up):
@@ -58,35 +57,24 @@ void Camera::moveRight(float offset)
 
 void Camera::turnLeft(float angle)
 {
-	glm::mat4 rotation = glm::rotate(glm::mat4(), glm::radians(angle), cameraUp);
-	glm::vec4 front = glm::vec4(cameraFront, 1.0f);
-	front = rotation * front;
-	cameraFront.x = front.x;
-	cameraFront.y = front.y;
-	cameraFront.z = front.z;
-	cameraLeft = glm::normalize(glm::vec3(front.z, 0.0f, -front.x));
-	cameraUp = glm::cross(cameraFront, cameraLeft);
+	makeRotation(glm::rotate(glm::mat4(), glm::radians(angle), cameraUp));
 }
 
 void Camera::turnRight(float angle)
 {
-	turnLeft(-angle);
+	makeRotation(glm::rotate(glm::mat4(), glm::radians(-angle), cameraUp));
+
 }
 
 void Camera::turnUp(float angle)
 {
-	glm::mat4 rotation = glm::rotate(glm::mat4(), glm::radians(angle), cameraLeft);
-	glm::vec4 front = glm::vec4(cameraFront, 1.0f);
-	front = rotation * front;
-	cameraFront.x = front.x;
-	cameraFront.y = front.y;
-	cameraFront.z = front.z;
-	cameraLeft = glm::normalize(glm::vec3(front.z, 0.0f, -front.x));
-	cameraUp = glm::cross(cameraFront, cameraLeft);
+	makeRotation(glm::rotate(glm::mat4(), glm::radians(angle), cameraLeft));
+
 }
 
-void Camera::turnDown(float angle) {
-	turnUp(-angle);
+void Camera::turnDown(float angle)
+{
+	makeRotation(glm::rotate(glm::mat4(), glm::radians(-angle), cameraLeft));
 }
 
 glm::mat4 Camera::getViewMatrix()
@@ -97,4 +85,15 @@ glm::mat4 Camera::getViewMatrix()
 glm::mat4 Camera::getProjMatrix()
 {
 	return glm::perspective(glm::radians(45.0f), 1.0f * SRC_WIDTH / SRC_HEIGHT, 0.1f, 100.0f);
+}
+
+void Camera::makeRotation(glm::mat4 rotation)
+{
+	glm::vec4 front = glm::vec4(cameraFront, 1.0f);
+	front = rotation * front;
+	cameraFront.x = front.x;
+	cameraFront.y = front.y;
+	cameraFront.z = front.z;
+	cameraLeft = glm::normalize(glm::vec3(front.z, 0.0f, -front.x));
+	cameraUp = glm::cross(cameraFront, cameraLeft);
 }
