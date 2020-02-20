@@ -1,4 +1,1 @@
-﻿  main.cpp
-d:\vs2017project\projects\learnopengl3\learnopengl\learnopengl\main.cpp(49): warning C4316: “GLSimpleTexture”: 在堆上分配的对象可能不是对齐 16
-d:\vs2017project\projects\learnopengl3\learnopengl\learnopengl\main.cpp(58): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
-  LearnOpenGL.vcxproj -> D:\VS2017Project\Projects\LearnOpenGL3\LearnOpenGL\Debug\LearnOpenGL.exe
+﻿  LearnOpenGL.vcxproj -> D:\VS2017Project\Projects\LearnOpenGL3\LearnOpenGL\Debug\LearnOpenGL.exe

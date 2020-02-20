@@ -4,6 +4,7 @@
 #include<GLFW/glfw3.h>
 #include<iostream>
 
+#include "Config.h"
 #include "Shader.h"
 #include "GLSimpleRect.h"
 #include "GLSimpleTexture.h"
@@ -15,8 +16,7 @@ void start();
 void update(float deltaTime);
 void render();
 
-const unsigned int SRC_WIDTH = 800;
-const unsigned int SRC_HEIGHT = 600;
+
 
 GLSimpleRect* rect = NULL;
 GLSimpleTexture* texture = NULL;

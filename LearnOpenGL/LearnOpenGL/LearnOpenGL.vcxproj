@@ -128,10 +128,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="glad.c" />
+    <ClCompile Include="GLObject.cpp" />
+    <ClCompile Include="GLSimpleRect.cpp" />
+    <ClCompile Include="GLSimpleTexture.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="TextureLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="Config.h" />
     <ClInclude Include="GLObject.h" />
     <ClInclude Include="GLSimpleRect.h" />
     <ClInclude Include="GLSimpleTexture.h" />
