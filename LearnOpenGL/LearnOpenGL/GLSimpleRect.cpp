@@ -25,8 +25,8 @@ GLSimpleRect::GLSimpleRect()
 	shader = new Shader("shader.vs", "shader.fs");
 }
 
-void GLSimpleRect::render()
+void GLSimpleRect::render(glm::mat4 viewMatrix, glm::mat4 projMatrix)
 {
-	GLObject::render();
+	GLObject::render(viewMatrix, projMatrix);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }

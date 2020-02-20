@@ -9,13 +9,11 @@ class GLSimpleTexture : public GLObject {
 public:
 	GLSimpleTexture();
 	virtual void start();
-	virtual void render();
+	virtual void render(glm::mat4 viewMatrix, glm::mat4 projMatrix);
 	virtual void update(float deltaTime);
 private:
 	unsigned int texture1, texture2;
 	glm::mat4 trans;
-	glm::mat4 view;
-	glm::mat4 projection;
 };
 
 #endif

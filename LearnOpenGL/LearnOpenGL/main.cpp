@@ -6,17 +6,21 @@
 
 #include "Config.h"
 #include "Shader.h"
+#include "Camera.h"
 #include "GLSimpleRect.h"
 #include "GLSimpleTexture.h"
 #include "TextureLoader.h"
 
 void framebuffer_size_callback(GLFWwindow* WINDOW, int width, int height);
+void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void processInput(GLFWwindow* window);
 void start();
 void update(float deltaTime);
 void render();
 
+void debug();
 
+Camera* camera = NULL;
 
 GLSimpleRect* rect = NULL;
 GLSimpleTexture* texture = NULL;
@@ -42,9 +46,15 @@ int main() {
 
 	glViewport(0, 0, SRC_WIDTH, SRC_HEIGHT);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwSetCursorPosCallback(window, mouse_callback);
 	
 	TextureLoader::init();
 
+	glm::vec3 pos = glm::vec3(0.0f, 0.0f, -3.0f);
+	glm::vec3 target = glm::vec3(0.0f, 0.0f, 0.0f);
+	camera = new Camera(pos, target);
 	rect = new GLSimpleRect();
 	texture = new GLSimpleTexture();
 
@@ -64,6 +74,7 @@ int main() {
 		timeLast = timeValue;
 	}
 
+	delete camera;
 	delete rect;
 	delete texture;
 
@@ -76,7 +87,34 @@ void framebuffer_size_callback(GLFWwindow* WINDOW, int width, int height) {
 	glViewport(0, 0, width, height);
 }
 
+void mouse_callback(GLFWwindow* window, double posX, double posY) {
+	static double lastX = posX;
+	static double lastY = posY;
+
+	double offsetX = posX - lastX;
+	double offsetY = posY - lastY;
+
+
+	float sensitivity = 0.05f;
+	camera->turnRight(offsetX * sensitivity);
+	camera->turnUp(offsetY * sensitivity);
+
+	lastX = posX;
+	lastY = posY;
+}
+
 void processInput(GLFWwindow* window) {
+	float cameraSpeed = 0.0005f;
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+		camera->moveFront(cameraSpeed);
+	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+		camera->moveBack(cameraSpeed);
+	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+		camera->moveLeft(cameraSpeed);
+	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+		camera->moveRight(cameraSpeed);
+	if (glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS)
+		debug();
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
 }
@@ -86,16 +124,31 @@ void start() {
 	texture->start();
 }
 
+void printVec3(std::string name, glm::vec3 vec) {
+	std::cout << name << " " << vec.x << " " << vec.y << " " << vec.z << std::endl;
+}
+
+void debug() {
+	printVec3("cameraPos", camera->cameraPos);
+	printVec3("camreaFront", camera->cameraFront);
+	printVec3("cameraRight", camera->cameraLeft);
+	printVec3("cameraUp", camera->cameraUp);
+}
+
 void update(float timeDelta) {
 	rect->update(timeDelta);
 	texture->update(timeDelta);
+
+	
 }
 
 void render() {
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	rect->render();
-	texture->render();
+	auto view = camera->getViewMatrix();
+	auto proj = camera->getProjMatrix();
+	rect->render(view, proj);
+	texture->render(view, proj);
 }
 

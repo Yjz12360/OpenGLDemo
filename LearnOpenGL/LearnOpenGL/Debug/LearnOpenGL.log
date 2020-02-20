@@ -1,1 +1,9 @@
-﻿  LearnOpenGL.vcxproj -> D:\VS2017Project\Projects\LearnOpenGL3\LearnOpenGL\Debug\LearnOpenGL.exe
+﻿  Camera.cpp
+  GLSimpleTexture.cpp
+  main.cpp
+d:\vs2017project\projects\learnopengl3\learnopengl\learnopengl\main.cpp(59): warning C4316: “GLSimpleTexture”: 在堆上分配的对象可能不是对齐 16
+d:\vs2017project\projects\learnopengl3\learnopengl\learnopengl\main.cpp(68): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+d:\vs2017project\projects\learnopengl3\learnopengl\learnopengl\main.cpp(99): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+d:\vs2017project\projects\learnopengl3\learnopengl\learnopengl\main.cpp(100): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+  正在生成代码...
+  LearnOpenGL.vcxproj -> D:\VS2017Project\Projects\LearnOpenGL3\LearnOpenGL\Debug\LearnOpenGL.exe

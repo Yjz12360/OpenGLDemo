@@ -22,10 +22,12 @@ void GLObject::start()
 {
 }
 
-void GLObject::render()
+void GLObject::render(glm::mat4 viewMatrix, glm::mat4 projMatrix)
 {
 	if (shader != NULL) {
 		shader->use();
+		shader->setMatrix4("view", viewMatrix);
+		shader->setMatrix4("projection", projMatrix);
 	}
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);

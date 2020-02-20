@@ -17,7 +17,7 @@ public:
 	GLObject();
 	~GLObject();
 	virtual void start();
-	virtual void render();
+	virtual void render(glm::mat4 viewMatrix, glm::mat4 projMatrix);
 	virtual void update(float deltaTime);
 protected:
 	unsigned int VAO, VBO, EBO;

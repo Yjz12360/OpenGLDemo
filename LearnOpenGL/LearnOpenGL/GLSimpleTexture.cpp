@@ -36,21 +36,15 @@ void GLSimpleTexture::start()
 {
 	GLObject::start();
 
-	trans = glm::rotate(trans, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-	trans = glm::rotate(trans, glm::radians(90.0f), glm::vec3(0.0, 0.0, 1.0));
 	trans = glm::scale(trans, glm::vec3(1.5, 1.5, 1.5));
 
-	view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
-	projection = glm::perspective(glm::radians(45.0f), 1.0f * SRC_WIDTH / SRC_HEIGHT, 0.1f, 100.0f);
 }
 
-void GLSimpleTexture::render()
+void GLSimpleTexture::render(glm::mat4 viewMatrix, glm::mat4 projMatrix)
 {
-	GLObject::render();
+	GLObject::render(viewMatrix, projMatrix);
 
 	shader->setMatrix4("model", trans);
-	shader->setMatrix4("view", view);
-	shader->setMatrix4("projection", projection);
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture1);
@@ -65,6 +59,5 @@ void GLSimpleTexture::update(float deltaTime)
 {
 	GLObject::update(deltaTime);
 
-	trans = glm::rotate(trans, glm::radians(90.0f * deltaTime),
-		glm::vec3(0.0, 0.0, 1.0));
+	
 }
