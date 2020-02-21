@@ -35,16 +35,12 @@ GLSimpleTexture::GLSimpleTexture()
 void GLSimpleTexture::start()
 {
 	GLObject::start();
-
-	trans = glm::scale(trans, glm::vec3(1.5, 1.5, 1.5));
-
+	scale(1.5f);
 }
 
 void GLSimpleTexture::render(glm::mat4 viewMatrix, glm::mat4 projMatrix)
 {
 	GLObject::render(viewMatrix, projMatrix);
-
-	shader->setMatrix4("model", trans);
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture1);
@@ -59,5 +55,4 @@ void GLSimpleTexture::update(float deltaTime)
 {
 	GLObject::update(deltaTime);
 
-	
 }

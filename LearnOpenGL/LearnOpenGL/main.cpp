@@ -7,8 +7,10 @@
 #include "Config.h"
 #include "Shader.h"
 #include "Camera.h"
+#include "GameScene.h"
 #include "GLSimpleRect.h"
 #include "GLSimpleTexture.h"
+#include "GLSimpleCube.h"
 #include "TextureLoader.h"
 
 void framebuffer_size_callback(GLFWwindow* WINDOW, int width, int height);
@@ -21,9 +23,7 @@ void render();
 void debug();
 
 Camera* camera = NULL;
-
-GLSimpleRect* rect = NULL;
-GLSimpleTexture* texture = NULL;
+GameScene* gameScene = NULL;
 
 int main() {
 	glfwInit();
@@ -49,14 +49,17 @@ int main() {
 
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	glfwSetCursorPosCallback(window, mouse_callback);
-	
+
+	glEnable(GL_DEPTH_TEST);
+
 	TextureLoader::init();
 
 	glm::vec3 pos = glm::vec3(0.0f, 0.0f, -3.0f);
 	glm::vec3 target = glm::vec3(0.0f, 0.0f, 0.0f);
 	camera = new Camera(pos, target);
-	rect = new GLSimpleRect();
-	texture = new GLSimpleTexture();
+	gameScene = new GameScene();
+	gameScene->addObject(new GLSimpleCube());
+	gameScene->addObject(new GLSimpleCube(glm::vec3(1.0f, 1.0f, 0.0f)));
 
 	start();
 
@@ -75,8 +78,6 @@ int main() {
 	}
 
 	delete camera;
-	delete rect;
-	delete texture;
 
 	glfwTerminate();
 	return 0;
@@ -120,8 +121,7 @@ void processInput(GLFWwindow* window) {
 }
 
 void start() {
-	rect->start();
-	texture->start();
+	gameScene->start();
 }
 
 void printVec3(std::string name, glm::vec3 vec) {
@@ -136,19 +136,15 @@ void debug() {
 }
 
 void update(float timeDelta) {
-	rect->update(timeDelta);
-	texture->update(timeDelta);
-
-	
+	gameScene->update(timeDelta);
 }
 
 void render() {
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	auto view = camera->getViewMatrix();
 	auto proj = camera->getProjMatrix();
-	rect->render(view, proj);
-	texture->render(view, proj);
+	gameScene->render(view, proj);
 }
 

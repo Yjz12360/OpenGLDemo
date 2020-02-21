@@ -128,8 +128,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="GLObject.cpp" />
+    <ClCompile Include="GLSimpleCube.cpp" />
     <ClCompile Include="GLSimpleRect.cpp" />
     <ClCompile Include="GLSimpleTexture.cpp" />
     <ClCompile Include="main.cpp" />
@@ -138,7 +140,9 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Config.h" />
+    <ClInclude Include="GameScene.h" />
     <ClInclude Include="GLObject.h" />
+    <ClInclude Include="GLSimpleCube.h" />
     <ClInclude Include="GLSimpleRect.h" />
     <ClInclude Include="GLSimpleTexture.h" />
     <ClInclude Include="Shader.h" />
@@ -148,6 +152,8 @@
   <ItemGroup>
     <None Include="shader.fs" />
     <None Include="shader.vs" />
+    <None Include="simpleCube.fs" />
+    <None Include="simpleCube.vs" />
     <None Include="simpleTex.fs" />
     <None Include="simpleTex.vs" />
   </ItemGroup>

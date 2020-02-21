@@ -51,6 +51,12 @@
     <ClCompile Include="Camera.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="GLSimpleCube.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Shader.h">
@@ -77,6 +83,12 @@
     <ClInclude Include="Camera.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="GLSimpleCube.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shader.vs">
@@ -89,6 +101,12 @@
       <Filter>资源文件\vShader</Filter>
     </None>
     <None Include="simpleTex.fs">
+      <Filter>资源文件\fShader</Filter>
+    </None>
+    <None Include="simpleCube.vs">
+      <Filter>资源文件\vShader</Filter>
+    </None>
+    <None Include="simpleCube.fs">
       <Filter>资源文件\fShader</Filter>
     </None>
   </ItemGroup>

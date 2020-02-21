@@ -13,7 +13,6 @@ public:
 	virtual void update(float deltaTime);
 private:
 	unsigned int texture1, texture2;
-	glm::mat4 trans;
 };
 
 #endif
