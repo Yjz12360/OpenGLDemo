@@ -16,13 +16,11 @@
 void framebuffer_size_callback(GLFWwindow* WINDOW, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void processInput(GLFWwindow* window);
-void start();
 void update(float deltaTime);
 void render();
 
 void debug();
 
-Camera* camera = NULL;
 GameScene* gameScene = NULL;
 
 int main() {
@@ -46,82 +44,52 @@ int main() {
 
 	glViewport(0, 0, SRC_WIDTH, SRC_HEIGHT);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	glfwSetCursorPosCallback(window, mouse_callback);
-
 	glEnable(GL_DEPTH_TEST);
 
 	TextureLoader::init();
 
-	glm::vec3 pos = glm::vec3(0.0f, 0.0f, -3.0f);
-	glm::vec3 target = glm::vec3(0.0f, 0.0f, 0.0f);
-	camera = new Camera(pos, target);
 	gameScene = new GameScene();
+	gameScene->setCamera(new Camera(glm::vec3(0.0f, 0.0f, -3.0f), glm::vec3(0.0f)));
 	gameScene->addObject(new GLSimpleCube());
 	gameScene->addObject(new GLSimpleCube(glm::vec3(1.0f, 1.0f, 0.0f)));
-
-	start();
+	gameScene->start();
 
 	double timeLast = glfwGetTime();
 	while (!glfwWindowShouldClose(window)) {
-		double timeValue = glfwGetTime();
+		double timeCurr = glfwGetTime();
+		double deltaTime = timeCurr - timeLast;
 
 		processInput(window);	
-		update(timeValue - timeLast);
+		update(deltaTime);
 		render();
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 
-		timeLast = timeValue;
+		timeLast = timeCurr;
 	}
-
-	delete camera;
 
 	glfwTerminate();
 	return 0;
 }
-
 
 void framebuffer_size_callback(GLFWwindow* WINDOW, int width, int height) {
 	glViewport(0, 0, width, height);
 }
 
 void mouse_callback(GLFWwindow* window, double posX, double posY) {
-	static double lastX = posX;
-	static double lastY = posY;
-
-	double offsetX = posX - lastX;
-	double offsetY = posY - lastY;
-
-
-	float sensitivity = 0.05f;
-	camera->turnRight(offsetX * sensitivity);
-	camera->turnUp(offsetY * sensitivity);
-
-	lastX = posX;
-	lastY = posY;
+	gameScene->handleMouseMove(posX, posY);
 }
 
 void processInput(GLFWwindow* window) {
-	float cameraSpeed = 0.0005f;
-	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		camera->moveFront(cameraSpeed);
-	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-		camera->moveBack(cameraSpeed);
-	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		camera->moveLeft(cameraSpeed);
-	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		camera->moveRight(cameraSpeed);
+	gameScene->handleKeyInput(window);
+
 	if (glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS)
 		debug();
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
-}
-
-void start() {
-	gameScene->start();
 }
 
 void printVec3(std::string name, glm::vec3 vec) {
@@ -129,10 +97,7 @@ void printVec3(std::string name, glm::vec3 vec) {
 }
 
 void debug() {
-	printVec3("cameraPos", camera->cameraPos);
-	printVec3("camreaFront", camera->cameraFront);
-	printVec3("cameraRight", camera->cameraLeft);
-	printVec3("cameraUp", camera->cameraUp);
+
 }
 
 void update(float timeDelta) {
@@ -142,9 +107,6 @@ void update(float timeDelta) {
 void render() {
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	auto view = camera->getViewMatrix();
-	auto proj = camera->getProjMatrix();
-	gameScene->render(view, proj);
+	gameScene->render();
 }
 
