@@ -25,9 +25,6 @@ public:
 		glm::vec3 rotation = GLObject::defaultRotation,
 		glm::vec3 scale = GLObject::defaultScale);
 
-	glm::vec3 getColor();
-	void setColor(glm::vec3 color);
-
 	Light getLight();
 	glm::vec3 getAmbient();
 	glm::vec3 getDiffuse();
@@ -37,7 +34,6 @@ public:
 	void setDiffuse(glm::vec3 diffuse);
 	void setSpecular(glm::vec3 specular);
 private:
-	glm::vec3 lightColor;
 	Light light;
 };
 

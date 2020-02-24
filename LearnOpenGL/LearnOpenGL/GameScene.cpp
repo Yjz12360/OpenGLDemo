@@ -76,6 +76,11 @@ void GameScene::update(float deltaTime)
 			objects[i]->update(deltaTime);
 		}
 	}
+	for (int i = 0; i < MAX_LIGHT_NUM; ++i) {
+		if (lights[i] != NULL) {
+			lights[i]->update(deltaTime);
+		}
+	}
 }
 
 void GameScene::render()
@@ -87,14 +92,11 @@ void GameScene::render(glm::mat4 viewMatrix, glm::mat4 projMatrix)
 {
 	int lightCount = 0;
 	glm::vec3 lightPos[MAX_LIGHT_NUM];
-	//glm::vec3 lightColor[MAX_LIGHT_NUM];
 	Light lightColor[MAX_LIGHT_NUM];
 	for (int i = 0; i < MAX_LIGHT_NUM; ++i) {
 		if (lights[i] == NULL) continue;
 		lightPos[lightCount] = lights[i]->getTranslation();
-		lightColor[lightCount].ambient = lights[i]->getAmbient();
-		lightColor[lightCount].diffuse = lights[i]->getDiffuse();
-		lightColor[lightCount].specular = lights[i]->getSpecular();
+		lightColor[lightCount] = lights[i]->getLight();
 		lightCount++;
 	}
 	for (int i = 0; i < MAX_OBJECT_NUM; ++i) {
@@ -115,10 +117,6 @@ void GameScene::render(glm::mat4 viewMatrix, glm::mat4 projMatrix)
 			std::string sLightSpecular = std::string("light").
 				append(1, cIndex).append(".specular");
 			objects[i]->getShader()->setVec3(sLightSpecular, lightColor[j].specular);
-			/*std::string sLightPos = std::string("lightPos").append(1, cIndex);
-			objects[i]->getShader()->setVec3(sLightPos, lightPos[j]);
-			std::string sLightColor = std::string("lightColor").append(1, cIndex);
-			objects[i]->getShader()->setVec3(sLightColor, lightColor[j]);*/
 		}
 		objects[i]->render(viewMatrix, projMatrix);
 	}

@@ -3,17 +3,6 @@
 GLLightObject::GLLightObject(glm::vec3 translation, glm::vec3 rotation, glm::vec3 scale)
 	:GLObject(translation, rotation, scale)
 {
-	lightColor = glm::vec3(1.0f);
-}
-
-glm::vec3 GLLightObject::getColor()
-{
-	return lightColor;
-}
-
-void GLLightObject::setColor(glm::vec3 color)
-{
-	lightColor = color;
 }
 
 Light GLLightObject::getLight()

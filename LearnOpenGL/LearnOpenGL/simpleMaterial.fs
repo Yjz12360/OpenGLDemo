@@ -19,10 +19,7 @@ struct Light{
 in vec3 Normal;
 in vec3 FragPos;
 
-uniform vec3 objectColor;
 uniform vec3 viewPos;
-//uniform vec3 lightPos1;
-//uniform vec3 lightColor1;
 uniform Material material;
 uniform Light light1;
 

@@ -27,13 +27,7 @@ void GLSimpleMaterial::render(glm::mat4 viewMatrix, glm::mat4 projMatrix)
 	shader->setVec3("material.specular", material.specular);
 	shader->setFloat("material.shininess", material.shininess);
 
-	shader->setVec3("objectColor", objectColor.x, objectColor.y, objectColor.z);
 	glDrawElements(GL_TRIANGLES, indexNum, GL_UNSIGNED_INT, 0);
-}
-
-void GLSimpleMaterial::setColor(glm::vec3 color)
-{
-	objectColor = color;
 }
 
 void GLSimpleMaterial::setMaterial(Material material)

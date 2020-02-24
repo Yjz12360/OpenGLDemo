@@ -32,7 +32,6 @@ public:
 		glm::vec3 scale = GLObject::defaultScale);
 	virtual void render(glm::mat4 viewMatrix, glm::mat4 projMatrix);
 
-	void setColor(glm::vec3 color);
 	void setMaterial(Material material);
 
 	static void initVertexData();
@@ -45,8 +44,6 @@ private:
 
 	static float* vertexData;
 	static unsigned int* indexData;
-
-	glm::vec3 objectColor;
 
 	Material material;
 };
