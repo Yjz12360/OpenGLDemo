@@ -57,6 +57,15 @@
     <ClCompile Include="GameScene.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="GLSimpleLight.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GLSimpleMaterial.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GLLightObject.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Shader.h">
@@ -89,6 +98,18 @@
     <ClInclude Include="GameScene.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="CubeVertexData.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GLSimpleLight.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GLSimpleMaterial.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GLLightObject.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shader.vs">
@@ -107,6 +128,18 @@
       <Filter>资源文件\vShader</Filter>
     </None>
     <None Include="simpleCube.fs">
+      <Filter>资源文件\fShader</Filter>
+    </None>
+    <None Include="simpleLight.vs">
+      <Filter>资源文件\vShader</Filter>
+    </None>
+    <None Include="simpleLight.fs">
+      <Filter>资源文件\fShader</Filter>
+    </None>
+    <None Include="simpleMaterial.vs">
+      <Filter>资源文件\vShader</Filter>
+    </None>
+    <None Include="simpleMaterial.fs">
       <Filter>资源文件\fShader</Filter>
     </None>
   </ItemGroup>

@@ -28,6 +28,10 @@ public:
 	void rotateY(float angle);
 	void rotateZ(float angle);
 	void scale(float scale);
+
+	glm::vec3 getTranslation();
+
+	Shader* getShader();
 protected:
 	unsigned int VAO, VBO, EBO;
 	Shader* shader = NULL;

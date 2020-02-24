@@ -87,6 +87,11 @@ glm::mat4 Camera::getProjMatrix()
 	return glm::perspective(glm::radians(45.0f), 1.0f * SRC_WIDTH / SRC_HEIGHT, 0.1f, 100.0f);
 }
 
+glm::vec3 Camera::getPos()
+{
+	return cameraPos;
+}
+
 void Camera::makeRotation(glm::mat4 rotation)
 {
 	glm::vec4 front = glm::vec4(cameraFront, 1.0f);

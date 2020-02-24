@@ -29,7 +29,9 @@ public:
 
 	glm::mat4 getViewMatrix();
 	glm::mat4 getProjMatrix();
-public:
+
+	glm::vec3 getPos();
+private:
 	void makeRotation(glm::mat4 rotation);
 
 	glm::vec3 cameraPos;

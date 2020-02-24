@@ -4,17 +4,6 @@ const glm::vec3 GLObject::defaultTranslation = glm::vec3(0.0f, 0.0f, 0.0f);
 const glm::vec3 GLObject::defaultRotation = glm::vec3(0.0f, 0.0f, 0.0f);
 const glm::vec3 GLObject::defaultScale = glm::vec3(1.0f, 1.0f, 1.0f);
 
-//GLObject::GLObject()
-//{
-//	glGenVertexArrays(1, &VAO);
-//	glGenBuffers(1, &VBO);
-//	glGenBuffers(1, &EBO);
-//
-//	glBindVertexArray(VAO);
-//	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-//	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-//}
-
 GLObject::GLObject(glm::vec3 translation, glm::vec3 rotation, glm::vec3 scale)
 {
 	this->translation = translation;
@@ -80,6 +69,16 @@ void GLObject::rotateZ(float angle)
 void GLObject::scale(float scale)
 {
 	scaleVec = glm::vec3(scale, scale, scale);
+}
+
+glm::vec3 GLObject::getTranslation()
+{
+	return translation;
+}
+
+Shader * GLObject::getShader()
+{
+	return shader;
 }
 
 glm::mat4 GLObject::getModelMatrix()

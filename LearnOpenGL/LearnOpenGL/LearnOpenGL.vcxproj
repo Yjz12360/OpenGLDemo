@@ -130,8 +130,11 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="glad.c" />
+    <ClCompile Include="GLLightObject.cpp" />
     <ClCompile Include="GLObject.cpp" />
     <ClCompile Include="GLSimpleCube.cpp" />
+    <ClCompile Include="GLSimpleLight.cpp" />
+    <ClCompile Include="GLSimpleMaterial.cpp" />
     <ClCompile Include="GLSimpleRect.cpp" />
     <ClCompile Include="GLSimpleTexture.cpp" />
     <ClCompile Include="main.cpp" />
@@ -140,9 +143,13 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Config.h" />
+    <ClInclude Include="CubeVertexData.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="GLLightObject.h" />
     <ClInclude Include="GLObject.h" />
     <ClInclude Include="GLSimpleCube.h" />
+    <ClInclude Include="GLSimpleLight.h" />
+    <ClInclude Include="GLSimpleMaterial.h" />
     <ClInclude Include="GLSimpleRect.h" />
     <ClInclude Include="GLSimpleTexture.h" />
     <ClInclude Include="Shader.h" />
@@ -154,6 +161,10 @@
     <None Include="shader.vs" />
     <None Include="simpleCube.fs" />
     <None Include="simpleCube.vs" />
+    <None Include="simpleLight.fs" />
+    <None Include="simpleLight.vs" />
+    <None Include="simpleMaterial.fs" />
+    <None Include="simpleMaterial.vs" />
     <None Include="simpleTex.fs" />
     <None Include="simpleTex.vs" />
   </ItemGroup>

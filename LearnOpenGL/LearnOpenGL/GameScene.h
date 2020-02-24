@@ -5,20 +5,28 @@
 
 #include<glad/glad.h>
 #include<GLFW/glfw3.h>
+#include<string>
+#include<string.h>
 
 #include "Camera.h"
 #include "GLObject.h"
+#include "GLLightObject.h"
 #include "GLSimpleCube.h"
+#include "GLSimpleLight.h"
+#include "GLSimpleMaterial.h"
 
 const unsigned int MAX_OBJECT_NUM = 100;
 const unsigned int MAX_CAMERA_NUM = 3;
+const unsigned int MAX_LIGHT_NUM = 3;
 
 class GameScene {
 public:
 	GameScene();
 	~GameScene();
 
-	void addObject(GLObject* object);
+	GLObject* addObject(GLObject* object);
+	GLLightObject* addLight(GLLightObject* light);
+
 	void setCamera(Camera* camera);
 	Camera* getCamera();
 
@@ -31,11 +39,11 @@ public:
 	void handleMouseMove(double mouseX, double mouseY);
 private:
 	int getAvailObjIndex();
+	int getAvailLightIndex();
 
 	Camera* camera;
 	GLObject* objects[MAX_OBJECT_NUM];
-
-	
+	GLLightObject* lights[MAX_LIGHT_NUM];
 };
 
 

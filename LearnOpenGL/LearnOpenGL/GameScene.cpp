@@ -5,6 +5,9 @@ GameScene::GameScene()
 	for (int i = 0; i < MAX_OBJECT_NUM; ++i) {
 		objects[i] = NULL;
 	}
+	for (int i = 0; i < MAX_LIGHT_NUM; ++i) {
+		lights[i] = NULL;
+	}
 	camera = NULL;
 }
 
@@ -15,16 +18,36 @@ GameScene::~GameScene()
 			delete objects[i];
 		}
 	}
+	for (int i = 0; i < MAX_LIGHT_NUM; ++i) {
+		if (lights[i] != NULL) {
+			delete lights[i];
+		}
+	}
 	if (camera != NULL) {
 		delete camera;
 	}
 }
 
-void GameScene::addObject(GLObject * object)
+GLObject* GameScene::addObject(GLObject * object)
 {
 	int index = getAvailObjIndex();
-	if (index == -1)return;
+	if (index == -1) {
+		delete object;
+		return NULL;
+	}
 	objects[index] = object;
+	return object;
+}
+
+GLLightObject * GameScene::addLight(GLLightObject * light)
+{
+	int index = getAvailLightIndex();
+	if (index == -1) {
+		delete light;
+		return NULL;
+	}
+	lights[index] = light;
+	return light;
 }
 
 void GameScene::setCamera(Camera * camera)
@@ -62,10 +85,46 @@ void GameScene::render()
 
 void GameScene::render(glm::mat4 viewMatrix, glm::mat4 projMatrix)
 {
+	int lightCount = 0;
+	glm::vec3 lightPos[MAX_LIGHT_NUM];
+	//glm::vec3 lightColor[MAX_LIGHT_NUM];
+	Light lightColor[MAX_LIGHT_NUM];
+	for (int i = 0; i < MAX_LIGHT_NUM; ++i) {
+		if (lights[i] == NULL) continue;
+		lightPos[lightCount] = lights[i]->getTranslation();
+		lightColor[lightCount].ambient = lights[i]->getAmbient();
+		lightColor[lightCount].diffuse = lights[i]->getDiffuse();
+		lightColor[lightCount].specular = lights[i]->getSpecular();
+		lightCount++;
+	}
 	for (int i = 0; i < MAX_OBJECT_NUM; ++i) {
-		if (objects[i] != NULL) {
-			objects[i]->render(viewMatrix, projMatrix);
+		if (objects[i] == NULL || (!objects[i]->getShader())) continue;
+		objects[i]->getShader()->use();
+		objects[i]->getShader()->setVec3("viewPos", getCamera()->getPos());
+		for (int j = 0; j < lightCount; ++j) {
+			char cIndex = (j + 1) + '0';
+			std::string sLightPos = std::string("light").
+				append(1, cIndex).append(".position");
+			objects[i]->getShader()->setVec3(sLightPos, lightPos[j]);
+			std::string sLightAmbient = std::string("light").
+				append(1, cIndex).append(".ambient");
+			objects[i]->getShader()->setVec3(sLightAmbient, lightColor[j].ambient);
+			std::string sLightDiffuse = std::string("light").
+				append(1, cIndex).append(".diffuse");
+			objects[i]->getShader()->setVec3(sLightDiffuse, lightColor[j].diffuse);
+			std::string sLightSpecular = std::string("light").
+				append(1, cIndex).append(".specular");
+			objects[i]->getShader()->setVec3(sLightSpecular, lightColor[j].specular);
+			/*std::string sLightPos = std::string("lightPos").append(1, cIndex);
+			objects[i]->getShader()->setVec3(sLightPos, lightPos[j]);
+			std::string sLightColor = std::string("lightColor").append(1, cIndex);
+			objects[i]->getShader()->setVec3(sLightColor, lightColor[j]);*/
 		}
+		objects[i]->render(viewMatrix, projMatrix);
+	}
+	for (int i = 0; i < MAX_LIGHT_NUM; ++i) {
+		if (lights[i] == NULL)  continue;
+		lights[i]->render(viewMatrix, projMatrix);
 	}
 }
 
@@ -104,6 +163,16 @@ int GameScene::getAvailObjIndex()
 {
 	for (int i = 0; i < MAX_OBJECT_NUM; ++i) {
 		if (objects[i] == NULL) {
+			return i;
+		}
+	}
+	return -1;
+}
+
+int GameScene::getAvailLightIndex()
+{
+	for (int i = 0; i < MAX_LIGHT_NUM; ++i) {
+		if (lights[i] == NULL) {
 			return i;
 		}
 	}

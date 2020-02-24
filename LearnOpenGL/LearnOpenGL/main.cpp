@@ -6,11 +6,7 @@
 
 #include "Config.h"
 #include "Shader.h"
-#include "Camera.h"
 #include "GameScene.h"
-#include "GLSimpleRect.h"
-#include "GLSimpleTexture.h"
-#include "GLSimpleCube.h"
 #include "TextureLoader.h"
 
 void framebuffer_size_callback(GLFWwindow* WINDOW, int width, int height);
@@ -49,10 +45,27 @@ int main() {
 	glEnable(GL_DEPTH_TEST);
 
 	TextureLoader::init();
+	GLSimpleCube::initVertexData();
+	GLSimpleLight::initVertexData();
+	GLSimpleMaterial::initVertexData();
 
 	gameScene = new GameScene();
 	gameScene->setCamera(new Camera(glm::vec3(0.0f, 0.0f, -3.0f), glm::vec3(0.0f)));
-	gameScene->addObject(new GLSimpleCube());
+	
+	GLSimpleLight* light = (GLSimpleLight*)gameScene->addLight(
+		new GLSimpleLight());
+	light->setAmbient(glm::vec3(0.1f));
+	light->setDiffuse(glm::vec3(0.5f));
+	light->setSpecular(glm::vec3(0.2f));
+	GLSimpleMaterial* material = (GLSimpleMaterial*)gameScene->addObject(
+		new GLSimpleMaterial(glm::vec3(0.0f, -1.0f, 0.0f)));
+	material->setMaterial(Material(
+		glm::vec3(1.0f, 0.5f, 0.31f),
+		glm::vec3(1.0f, 0.5f, 0.31f),
+		glm::vec3(1.0f, 0.5f, 0.31f),
+		32.0f
+	));
+	gameScene->addObject(new GLSimpleCube(glm::vec3(-1.0f, 1.0f, 0.0f)));
 	gameScene->addObject(new GLSimpleCube(glm::vec3(1.0f, 1.0f, 0.0f)));
 	gameScene->start();
 
@@ -70,6 +83,8 @@ int main() {
 
 		timeLast = timeCurr;
 	}
+
+	delete gameScene;
 
 	glfwTerminate();
 	return 0;

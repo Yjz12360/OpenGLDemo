@@ -1,47 +1,7 @@
 #include "GLSimpleCube.h"
 
-static float cubeVertices[] = {
-	// pos              uv
-//front
-	 -0.5f,-0.5f,-0.5f, 0.0f, 0.0f,
-	 -0.5f, 0.5f,-0.5f, 0.0f, 1.0f,
-	  0.5f, 0.5f,-0.5f, 1.0f, 1.0f,
-	  0.5f,-0.5f,-0.5f, 1.0f, 0.0f,
-//back
-	  0.5f,-0.5f, 0.5f, 0.0f, 0.0f,
-	  0.5f, 0.5f, 0.5f, 0.0f, 1.0f,
-	 -0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
-	 -0.5f,-0.5f, 0.5f, 1.0f, 0.0f,
-//left
-	 -0.5f,-0.5f, 0.5f, 0.0f, 0.0f,
-	 -0.5f, 0.5f, 0.5f, 0.0f, 1.0f,
-	 -0.5f, 0.5f,-0.5f, 1.0f, 1.0f,
-	 -0.5f,-0.5f,-0.5f, 1.0f, 0.0f,
-//right
-	  0.5f,-0.5f,-0.5f, 0.0f, 0.0f,
-	  0.5f, 0.5f,-0.5f, 0.0f, 1.0f,
-	  0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
-	  0.5f,-0.5f, 0.5f, 1.0f, 0.0f,
-//top
-	 -0.5f, 0.5f,-0.5f, 0.0f, 0.0f,
-	 -0.5f, 0.5f, 0.5f, 0.0f, 1.0f,
-	  0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
-	  0.5f, 0.5f,-0.5f, 1.0f, 0.0f,
-//bottom
-	 -0.5f,-0.5f, 0.5f, 0.0f, 0.0f,
-	 -0.5f,-0.5f,-0.5f, 0.0f, 1.0f,
-	  0.5f,-0.5f,-0.5f, 1.0f, 1.0f,
-	  0.5f,-0.5f, 0.5f, 1.0f, 0.0f
-};
-
-static unsigned int cubeIndices[] = {
-	0,1,2,0,2,3,
-	4,5,6,4,6,7,
-	8,9,10,8,10,11,
-	12,13,14,12,14,15,
-	16,17,18,16,18,19,
-	20,21,22,20,22,23
-};
+float* GLSimpleCube::vertexData = NULL;
+unsigned int* GLSimpleCube::indexData = NULL;
 
 GLSimpleCube::GLSimpleCube(glm::vec3 translation, glm::vec3 rotation, glm::vec3 scale)
 	:GLObject(translation, rotation, scale)
@@ -51,16 +11,18 @@ GLSimpleCube::GLSimpleCube(glm::vec3 translation, glm::vec3 rotation, glm::vec3 
 	TextureLoader::setWrap(GL_REPEAT);
 	TextureLoader::loadTexture(texture2, "tex2.jpg");
 
-	glBufferData(GL_ARRAY_BUFFER, sizeof(cubeVertices), cubeVertices, GL_STATIC_DRAW);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(cubeIndices), cubeIndices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, vertexDataSize, vertexData, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexDataSize, indexData, GL_STATIC_DRAW);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, vertexAttribNum * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, vertexAttribNum * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 
 	shader = new Shader("simpleCube.vs", "simpleCube.fs");
 }
+
+
 
 void GLSimpleCube::render(glm::mat4 viewMatrix, glm::mat4 projMatrix)
 {
@@ -72,5 +34,22 @@ void GLSimpleCube::render(glm::mat4 viewMatrix, glm::mat4 projMatrix)
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, texture2);
 	shader->setInt("textureB", 1);
-	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, indexNum, GL_UNSIGNED_INT, 0);
 }
+
+void GLSimpleCube::initVertexData()
+{
+	vertexData = new float[cubeVertexNum * vertexAttribNum];
+	for (int i = 0; i < cubeVertexNum; ++i) {
+		vertexData[i * vertexAttribNum] = CUBE_VERTEX_DATA(i, PosX);
+		vertexData[i * vertexAttribNum + 1] = CUBE_VERTEX_DATA(i, PosY);
+		vertexData[i * vertexAttribNum + 2] = CUBE_VERTEX_DATA(i, PosZ);
+		vertexData[i * vertexAttribNum + 3] = CUBE_VERTEX_DATA(i, TexU);
+		vertexData[i * vertexAttribNum + 4] = CUBE_VERTEX_DATA(i, TexV);
+	}
+	indexData = new unsigned int[cubeIndexNum];
+	for (int i = 0; i < cubeIndexNum; ++i) {
+		indexData[i] = CUBE_INDEX_DATA(i);
+	}
+}
+
