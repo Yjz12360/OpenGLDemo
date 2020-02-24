@@ -4,20 +4,8 @@
 #define GL_LIGHT_OBJECT_H
 
 #include "GLObject.h"
+#include "Light.h"
 
-struct Light {
-	glm::vec3 ambient;
-	glm::vec3 diffuse;
-	glm::vec3 specular;
-
-	Light() :ambient(glm::vec3(1.0f)), 
-		diffuse(glm::vec3(1.0f)),specular(glm::vec3(1.0f)) {}
-	Light(glm::vec3 ambient, glm::vec3 diffuse,
-		glm::vec3 specular) :
-		ambient(ambient),
-		diffuse(diffuse),
-		specular(specular){};
-};
 
 class GLLightObject : public GLObject {
 public:

@@ -14,6 +14,8 @@
 #include "GLSimpleCube.h"
 #include "GLSimpleLight.h"
 #include "GLSimpleMaterial.h"
+#include "GLSimpleTexture.h"
+#include "GLLightMapCube.h"
 
 const unsigned int MAX_OBJECT_NUM = 100;
 const unsigned int MAX_CAMERA_NUM = 3;

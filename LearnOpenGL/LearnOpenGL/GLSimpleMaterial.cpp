@@ -45,7 +45,6 @@ void GLSimpleMaterial::initVertexData()
 		vertexData[i * vertexAttribNum + 3] = CUBE_VERTEX_DATA(i, NormalX);
 		vertexData[i * vertexAttribNum + 4] = CUBE_VERTEX_DATA(i, NormalY);
 		vertexData[i * vertexAttribNum + 5] = CUBE_VERTEX_DATA(i, NormalZ);
-
 	}
 	indexData = new unsigned int[cubeIndexNum];
 	for (int i = 0; i < cubeIndexNum; ++i) {

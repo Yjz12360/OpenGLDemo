@@ -130,6 +130,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="glad.c" />
+    <ClCompile Include="GLLightMapCube.cpp" />
     <ClCompile Include="GLLightObject.cpp" />
     <ClCompile Include="GLObject.cpp" />
     <ClCompile Include="GLSimpleCube.cpp" />
@@ -145,6 +146,7 @@
     <ClInclude Include="Config.h" />
     <ClInclude Include="CubeVertexData.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="GLLightMapCube.h" />
     <ClInclude Include="GLLightObject.h" />
     <ClInclude Include="GLObject.h" />
     <ClInclude Include="GLSimpleCube.h" />
@@ -152,11 +154,15 @@
     <ClInclude Include="GLSimpleMaterial.h" />
     <ClInclude Include="GLSimpleRect.h" />
     <ClInclude Include="GLSimpleTexture.h" />
+    <ClInclude Include="Light.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="stb_image.h" />
+    <ClInclude Include="Material.h" />
     <ClInclude Include="TextureLoader.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="lightMap.fs" />
+    <None Include="lightMap.vs" />
     <None Include="shader.fs" />
     <None Include="shader.vs" />
     <None Include="simpleCube.fs" />
@@ -169,6 +175,8 @@
     <None Include="simpleTex.vs" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="boxDiffuse.jpg" />
+    <Image Include="boxSpecular.jpg" />
     <Image Include="tex.jpg" />
     <Image Include="tex2.jpg" />
     <Image Include="tex3.jpg" />

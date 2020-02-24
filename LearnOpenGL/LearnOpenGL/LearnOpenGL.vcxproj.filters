@@ -66,6 +66,9 @@
     <ClCompile Include="GLLightObject.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="GLLightMapCube.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Shader.h">
@@ -110,6 +113,15 @@
     <ClInclude Include="GLLightObject.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="GLLightMapCube.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shader.vs">
@@ -142,6 +154,12 @@
     <None Include="simpleMaterial.fs">
       <Filter>资源文件\fShader</Filter>
     </None>
+    <None Include="lightMap.vs">
+      <Filter>资源文件\vShader</Filter>
+    </None>
+    <None Include="lightMap.fs">
+      <Filter>资源文件\fShader</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="tex.jpg">
@@ -151,6 +169,12 @@
       <Filter>资源文件\resource\texture</Filter>
     </Image>
     <Image Include="tex3.jpg">
+      <Filter>资源文件\resource\texture</Filter>
+    </Image>
+    <Image Include="boxDiffuse.jpg">
+      <Filter>资源文件\resource\texture</Filter>
+    </Image>
+    <Image Include="boxSpecular.jpg">
       <Filter>资源文件\resource\texture</Filter>
     </Image>
   </ItemGroup>
