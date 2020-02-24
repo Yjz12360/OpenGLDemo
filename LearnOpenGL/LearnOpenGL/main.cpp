@@ -47,17 +47,32 @@ int main() {
 	TextureLoader::init();
 	GLSimpleCube::initVertexData();
 	GLSimpleLight::initVertexData();
+	GLPointLight::initVertexData();
 	GLSimpleMaterial::initVertexData();
 	GLLightMapCube::initVertexData();
 
 	gameScene = new GameScene();
-	gameScene->setCamera(new Camera(glm::vec3(0.0f, 0.0f, -3.0f), glm::vec3(0.0f)));
+	gameScene->setCamera(new Camera(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f)));
 	
-	GLSimpleLight* light = (GLSimpleLight*)gameScene->addLight(
-		new GLSimpleLight());
-	light->setAmbient(glm::vec3(0.1f));
-	light->setDiffuse(glm::vec3(0.5f));
-	light->setSpecular(glm::vec3(0.2f));
+	GLLightObject* light = (GLLightObject*)gameScene->addLight(
+		new GLPointLight(glm::vec3(0.0f, 0.0f, 0.0f)));
+	light->setAmbient(glm::vec3(0.3f));
+	light->setDiffuse(glm::vec3(2.8f));
+	light->setSpecular(glm::vec3(0.5f));
+
+	/*GLLightObject* light2 = (GLLightObject*)gameScene->addLight(
+		new GLPointLight());
+	light2->setAmbient(glm::vec3(0.1f));
+	light2->setDiffuse(glm::vec3(0.5f));
+	light2->setSpecular(glm::vec3(0.2f));
+
+	GLLightObject* light3 = (GLLightObject*)gameScene->addLight(
+		new GLPointLight(glm::vec3(-1.0f, 0.0f, 1.0f)));
+	light3->setAmbient(glm::vec3(0.1f));
+	light3->setDiffuse(glm::vec3(0.5f));
+	light3->setSpecular(glm::vec3(0.2f));*/
+
+
 	GLLightMapCube* lightMapCube = (GLLightMapCube*)gameScene->addObject(
 		new GLLightMapCube(glm::vec3(0.0f, -1.0f, 0.0f)));
 	/*GLSimpleMaterial* material = (GLSimpleMaterial*)gameScene->addObject(
@@ -68,7 +83,7 @@ int main() {
 		glm::vec3(1.0f, 0.5f, 0.31f),
 		32.0f
 	));*/
-	gameScene->addObject(new GLSimpleCube(glm::vec3(-1.0f, 1.0f, 0.0f)));
+	gameScene->addObject(new GLSimpleCube(glm::vec3(-5.0f, 1.0f, 0.0f)));
 	gameScene->addObject(new GLSimpleCube(glm::vec3(1.0f, 1.0f, 0.0f)));
 	gameScene->start();
 

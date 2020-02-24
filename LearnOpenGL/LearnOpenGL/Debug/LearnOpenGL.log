@@ -1,3 +1,3 @@
 ﻿  main.cpp
-d:\vs2017project\projects\learnopengl3\learnopengl\learnopengl\main.cpp(81): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+d:\vs2017project\projects\learnopengl3\learnopengl\learnopengl\main.cpp(96): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
   LearnOpenGL.vcxproj -> D:\VS2017Project\Projects\LearnOpenGL3\LearnOpenGL\Debug\LearnOpenGL.exe

@@ -13,16 +13,14 @@ public:
 		glm::vec3 rotation = GLObject::defaultRotation,
 		glm::vec3 scale = GLObject::defaultScale);
 
-	Light getLight();
-	glm::vec3 getAmbient();
-	glm::vec3 getDiffuse();
-	glm::vec3 getSpecular();
-	void setLight(Light light);
-	void setAmbient(glm::vec3 ambient);
-	void setDiffuse(glm::vec3 diffuse);
-	void setSpecular(glm::vec3 specular);
-private:
-	Light light;
+	virtual LightType getLightType() = 0;
+	virtual const Light* getLight() = 0;
+	virtual glm::vec3 getAmbient() = 0;
+	virtual glm::vec3 getDiffuse() = 0;
+	virtual glm::vec3 getSpecular() = 0;
+	virtual void setAmbient(glm::vec3 ambient) = 0;
+	virtual void setDiffuse(glm::vec3 diffuse) = 0;
+	virtual void setSpecular(glm::vec3 specular) = 0;
 };
 
 #endif

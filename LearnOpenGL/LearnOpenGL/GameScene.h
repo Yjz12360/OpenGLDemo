@@ -11,6 +11,7 @@
 #include "Camera.h"
 #include "GLObject.h"
 #include "GLLightObject.h"
+#include "GLPointLight.h"
 #include "GLSimpleCube.h"
 #include "GLSimpleLight.h"
 #include "GLSimpleMaterial.h"
@@ -42,6 +43,9 @@ public:
 private:
 	int getAvailObjIndex();
 	int getAvailLightIndex();
+
+	void setShaderUniform();
+
 
 	Camera* camera;
 	GLObject* objects[MAX_OBJECT_NUM];

@@ -90,34 +90,9 @@ void GameScene::render()
 
 void GameScene::render(glm::mat4 viewMatrix, glm::mat4 projMatrix)
 {
-	int lightCount = 0;
-	glm::vec3 lightPos[MAX_LIGHT_NUM];
-	Light lightColor[MAX_LIGHT_NUM];
-	for (int i = 0; i < MAX_LIGHT_NUM; ++i) {
-		if (lights[i] == NULL) continue;
-		lightPos[lightCount] = lights[i]->getTranslation();
-		lightColor[lightCount] = lights[i]->getLight();
-		lightCount++;
-	}
+	setShaderUniform();
 	for (int i = 0; i < MAX_OBJECT_NUM; ++i) {
-		if (objects[i] == NULL || (!objects[i]->getShader())) continue;
-		objects[i]->getShader()->use();
-		objects[i]->getShader()->setVec3("viewPos", getCamera()->getPos());
-		for (int j = 0; j < lightCount; ++j) {
-			char cIndex = (j + 1) + '0';
-			std::string sLightPos = std::string("light").
-				append(1, cIndex).append(".position");
-			objects[i]->getShader()->setVec3(sLightPos, lightPos[j]);
-			std::string sLightAmbient = std::string("light").
-				append(1, cIndex).append(".ambient");
-			objects[i]->getShader()->setVec3(sLightAmbient, lightColor[j].ambient);
-			std::string sLightDiffuse = std::string("light").
-				append(1, cIndex).append(".diffuse");
-			objects[i]->getShader()->setVec3(sLightDiffuse, lightColor[j].diffuse);
-			std::string sLightSpecular = std::string("light").
-				append(1, cIndex).append(".specular");
-			objects[i]->getShader()->setVec3(sLightSpecular, lightColor[j].specular);
-		}
+		if (objects[i] == NULL) continue;
 		objects[i]->render(viewMatrix, projMatrix);
 	}
 	for (int i = 0; i < MAX_LIGHT_NUM; ++i) {
@@ -129,7 +104,7 @@ void GameScene::render(glm::mat4 viewMatrix, glm::mat4 projMatrix)
 void GameScene::handleKeyInput(GLFWwindow* window)
 {
 	if (camera != NULL) {
-		float cameraSpeed = 0.0005f;
+		float cameraSpeed = 0.001f;
 		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 			camera->moveFront(cameraSpeed);
 		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
@@ -175,5 +150,70 @@ int GameScene::getAvailLightIndex()
 		}
 	}
 	return -1;
+}
+
+void GameScene::setShaderUniform()
+{
+	int lightCount = 0;
+	GLLightObject* currLights[MAX_LIGHT_NUM];
+	int shaderLightIndex[MAX_LIGHT_NUM];
+	int dir = 0, point = 0, spot = 0;
+	for (int i = 0; i < MAX_LIGHT_NUM; ++i) {
+		if (lights[i] == NULL) continue;
+		if (lights[i]->getLight() == NULL) continue;
+		currLights[lightCount] = lights[i];
+		switch (lights[i]->getLightType()) {
+		case Point:shaderLightIndex[lightCount] = point++; break;
+		case Direction:shaderLightIndex[lightCount] = dir++; break;
+		case Spot:shaderLightIndex[lightCount] = spot++; break;
+		}
+		lightCount++;
+	}
+	for (int i = 0; i < MAX_OBJECT_NUM; ++i) {
+		if (objects[i] == NULL || (!objects[i]->getShader())) continue;
+		objects[i]->getShader()->use();
+		objects[i]->getShader()->setVec3("viewPos", getCamera()->getPos());
+		for (int j = 0; j < lightCount; ++j) {
+			std::string attrName = "";
+			LightType lightType = currLights[j]->getLightType();
+			switch (lightType) {
+			case Point:attrName = "pointLights"; break;
+			case Direction: attrName = "dirLights"; break;
+			case Spot:attrName = "spotLights"; break;
+			}
+			char cIndex = shaderLightIndex[j] + '0';
+			std::string sIndex = std::string("[").append(1, cIndex).append("]");
+
+			std::string sLightAmbient = attrName + sIndex + ".ambient";
+			objects[i]->getShader()->setVec3(sLightAmbient, currLights[j]->getAmbient());
+			std::string sLightDiffuse = attrName + sIndex + ".diffuse";
+			objects[i]->getShader()->setVec3(sLightDiffuse, currLights[j]->getDiffuse());
+			std::string sLightSpecular = attrName + sIndex + ".specular";
+			objects[i]->getShader()->setVec3(sLightSpecular, currLights[j]->getSpecular());
+
+			if (lightType == Point) {
+				std::string sLightPos = attrName + sIndex + ".position";
+				objects[i]->getShader()->setVec3(sLightPos, currLights[j]->getTranslation());
+				std::string sLightConstant = attrName + sIndex + ".constant";
+				objects[i]->getShader()->setFloat(sLightConstant, 
+					((PointLight*)currLights[j]->getLight())->constant);
+				std::string sLightLinear = attrName + sIndex + ".linear";
+				objects[i]->getShader()->setFloat(sLightLinear,
+					((PointLight*)currLights[j]->getLight())->linear);
+
+				std::string sLightQuadratic = attrName + sIndex + ".quadratic";
+				objects[i]->getShader()->setFloat(sLightQuadratic,
+					((PointLight*)currLights[j]->getLight())->quadratic);
+
+			}
+			else if (lightType == Direction) {
+				//...
+			}
+			else if (lightType == Spot) {
+				//...
+			}
+		}
+		objects[i]->getShader()->setInt("pointLightNum", point);
+	}
 }
 
