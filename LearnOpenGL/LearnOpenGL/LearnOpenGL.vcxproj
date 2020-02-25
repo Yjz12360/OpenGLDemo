@@ -140,6 +140,7 @@
     <ClCompile Include="GLSimpleMaterial.cpp" />
     <ClCompile Include="GLSimpleRect.cpp" />
     <ClCompile Include="GLSimpleTexture.cpp" />
+    <ClCompile Include="GLSpotLight.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="TextureLoader.cpp" />
   </ItemGroup>
@@ -158,7 +159,7 @@
     <ClInclude Include="GLSimpleMaterial.h" />
     <ClInclude Include="GLSimpleRect.h" />
     <ClInclude Include="GLSimpleTexture.h" />
-    <ClInclude Include="GLSpotLightObject.h" />
+    <ClInclude Include="GLSpotLight.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="LightInfo.h" />
     <ClInclude Include="Shader.h" />

@@ -67,6 +67,11 @@ void GameScene::start()
 			objects[i]->start();
 		}
 	}
+	for (int i = 0; i < MAX_LIGHT_NUM; ++i) {
+		if (lights[i] != NULL) {
+			lights[i]->start();
+		}
+	}
 }
 
 void GameScene::update(float deltaTime)
@@ -200,24 +205,40 @@ void GameScene::setShaderUniform()
 				std::string sLightLinear = attrName + sIndex + ".linear";
 				objects[i]->getShader()->setFloat(sLightLinear,
 					((PointLight*)currLights[j]->getLight())->linear);
-
 				std::string sLightQuadratic = attrName + sIndex + ".quadratic";
 				objects[i]->getShader()->setFloat(sLightQuadratic,
 					((PointLight*)currLights[j]->getLight())->quadratic);
-
 			}
 			else if (lightType == Direction) {
 				std::string sLightDirection = attrName + sIndex + ".direction";
 				objects[i]->getShader()->setVec3(sLightDirection,
 					((DirectionLight*)currLights[j]->getLight())->direction);
-				glm::vec3 d = ((DirectionLight*)currLights[j]->getLight())->direction;
 			}
 			else if (lightType == Spot) {
-				//...
+				std::string sLightPos = attrName + sIndex + ".position";
+				objects[i]->getShader()->setVec3(sLightPos,
+					currLights[j]->getTranslation());
+				glm::vec3 t = currLights[j]->getTranslation();
+				std::string sLightDirection = attrName + sIndex + ".direction";
+				objects[i]->getShader()->setVec3(sLightDirection,
+					((SpotLight*)currLights[j]->getLight())->direction);
+				std::string sLightCutOff = attrName + sIndex + ".cutOff";
+				objects[i]->getShader()->setFloat(sLightCutOff,
+					((SpotLight*)currLights[j]->getLight())->cutOff);
+				std::string sLightOutCutOff = attrName + sIndex + ".outerCutOff";
+				objects[i]->getShader()->setFloat(sLightOutCutOff,
+					((SpotLight*)currLights[j]->getLight())->outerCutOff);
+				std::string sLightLinear = attrName + sIndex + ".linear";
+				objects[i]->getShader()->setFloat(sLightLinear,
+					((SpotLight*)currLights[j]->getLight())->linear);
+				std::string sLightQuadratic = attrName + sIndex + ".quadratic";
+				objects[i]->getShader()->setFloat(sLightQuadratic,
+					((SpotLight*)currLights[j]->getLight())->quadratic);
 			}
 		}
 		objects[i]->getShader()->setInt("pointLightNum", point);
 		objects[i]->getShader()->setInt("dirLightNum", dir);
+		objects[i]->getShader()->setInt("spotLightNum", spot);
 	}
 }
 

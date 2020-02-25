@@ -48,12 +48,18 @@ int main() {
 	GLSimpleCube::initVertexData();
 	GLSimpleLight::initVertexData();
 	GLPointLight::initVertexData();
+	GLSpotLight::initVertexData();
 	GLSimpleMaterial::initVertexData();
 	GLLightMapCube::initVertexData();
 
 	gameScene = new GameScene();
 	gameScene->setCamera(new Camera(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f)));
 	
+	/*GLLightObject* spotLight = gameScene->addLight(
+		new GLSpotLight(glm::vec3(0.0f, 0.0f, 2.0f), glm::vec3(0.0f, 0.0f, -1.0f)));
+	spotLight->setAmbient(glm::vec3(0.1f));
+	spotLight->setDiffuse(glm::vec3(0.5f));
+	spotLight->setSpecular(glm::vec3(0.2f));*/
 	GLLightObject* dirLight = (GLLightObject*)gameScene->addLight(
 		new GLDirectionLight(glm::vec3(-0.2f, -1.0f, -0.3f)));
 	dirLight->setAmbient(glm::vec3(0.1f));
@@ -86,7 +92,7 @@ int main() {
 
 
 	GLLightMapCube* lightMapCube = (GLLightMapCube*)gameScene->addObject(
-		new GLLightMapCube(glm::vec3(0.0f, -1.0f, 0.0f)));
+		new GLLightMapCube(glm::vec3(0.0f, 0.0f, 0.0f)));
 	/*GLSimpleMaterial* material = (GLSimpleMaterial*)gameScene->addObject(
 		new GLSimpleMaterial(glm::vec3(0.0f, -1.0f, 0.0f)));
 	material->setMaterial(Material(

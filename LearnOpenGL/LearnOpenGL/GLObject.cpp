@@ -74,9 +74,16 @@ void GLObject::scale(float scale)
 	modelMatrix = glm::scale(modelMatrix, glm::vec3(scale));
 }
 
+void GLObject::lookAt(glm::vec3 direction)
+{
+	glm::vec3 pos = getTranslation();
+	modelMatrix = glm::lookAt(pos, pos + direction, glm::vec3(0.0f, 1.0f, 0.0f));
+}
+
 glm::vec3 GLObject::getTranslation()
 {
-	return glm::vec3(modelMatrix[0][3], modelMatrix[1][3], modelMatrix[2][3]);
+	return glm::vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);
+	//return glm::vec3(modelMatrix[0][3], modelMatrix[1][3], modelMatrix[2][3]);
 }
 
 Shader * GLObject::getShader()

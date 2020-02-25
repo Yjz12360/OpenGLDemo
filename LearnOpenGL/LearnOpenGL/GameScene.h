@@ -12,6 +12,7 @@
 #include "GLObject.h"
 #include "GLLightObject.h"
 #include "GLDirectionLight.h"
+#include "GLSpotLight.h"
 #include "GLPointLight.h"
 #include "GLSimpleCube.h"
 #include "GLSimpleLight.h"

@@ -6,12 +6,12 @@
 #include"GLLightObject.h"
 #include"CubeVertexData.h"
 
-class GLSpotLightObject : public GLLightObject {
+class GLSpotLight : public GLLightObject {
 public:
-	GLSpotLightObject(glm::vec3 translation = GLObject::defaultTranslation,
-		glm::vec3 rotation = GLObject::defaultRotation,
-		glm::vec3 scale = GLObject::defaultScale);
+	GLSpotLight(glm::vec3 translation = GLObject::defaultTranslation,
+		glm::vec3 direction = GLSpotLight::defaultDirection);
 
+	virtual void start();
 	virtual void render(glm::mat4 viewMatrix, glm::mat4 projMatrix);
 	static void initVertexData();
 
@@ -25,6 +25,8 @@ public:
 	virtual void setSpecular(glm::vec3 specular);
 
 private:
+	const static glm::vec3 defaultDirection;
+
 	const static unsigned int vertexNum = cubeVertexNum;
 	const static unsigned int vertexAttribNum = 3;
 	const static unsigned int vertexDataSize = sizeof(float) * vertexNum * vertexAttribNum;

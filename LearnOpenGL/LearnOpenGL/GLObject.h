@@ -32,6 +32,8 @@ public:
 	void rotateZ(float angle);
 	void scale(float scale);
 
+	void lookAt(glm::vec3 direction);
+
 	glm::vec3 getTranslation();
 
 	Shader* getShader();
