@@ -6,9 +6,12 @@ const glm::vec3 GLObject::defaultScale = glm::vec3(1.0f, 1.0f, 1.0f);
 
 GLObject::GLObject(glm::vec3 translation, glm::vec3 rotation, glm::vec3 scale)
 {
-	this->translation = translation;
-	this->rotation = rotation;
-	this->scaleVec = scale;
+	modelMatrix = glm::mat4(1.0f);
+	modelMatrix = glm::scale(modelMatrix, glm::vec3(scale));
+	modelMatrix = glm::rotate(modelMatrix, rotation.x, glm::vec3(1.0f, 0.0f, 0.0f));
+	modelMatrix = glm::rotate(modelMatrix, rotation.y, glm::vec3(0.0f, 1.0f, 0.0f));
+	modelMatrix = glm::rotate(modelMatrix, rotation.z, glm::vec3(0.0f, 0.0f, 1.0f));
+	modelMatrix = glm::translate(modelMatrix, translation);
 
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
@@ -34,7 +37,7 @@ void GLObject::render(glm::mat4 viewMatrix, glm::mat4 projMatrix)
 {
 	if (shader != NULL) {
 		shader->use();
-		shader->setMatrix4("model", getModelMatrix());
+		shader->setMatrix4("model", modelMatrix);
 		shader->setMatrix4("view", viewMatrix);
 		shader->setMatrix4("projection", projMatrix);
 	}
@@ -48,46 +51,35 @@ void GLObject::update(float deltaTime)
 
 void GLObject::translate(glm::vec3 offset)
 {
-	translation += offset;
+	modelMatrix = glm::translate(modelMatrix, offset);
 }
 
 void GLObject::rotateX(float angle)
 {
-	rotation.x += glm::radians(angle);
+	modelMatrix = glm::rotate(modelMatrix, angle, glm::vec3(1.0f, 0.0f, 0.0f));
 }
 
 void GLObject::rotateY(float angle)
 {
-	rotation.y += glm::radians(angle);
+	modelMatrix = glm::rotate(modelMatrix, angle, glm::vec3(0.0f, 1.0f, 0.0f));
 }
 
 void GLObject::rotateZ(float angle)
 {
-	rotation.z += glm::radians(angle);
+	modelMatrix = glm::rotate(modelMatrix, angle, glm::vec3(0.0f, 0.0f, 1.0f));
 }
 
 void GLObject::scale(float scale)
 {
-	scaleVec = glm::vec3(scale, scale, scale);
+	modelMatrix = glm::scale(modelMatrix, glm::vec3(scale));
 }
 
 glm::vec3 GLObject::getTranslation()
 {
-	return translation;
+	return glm::vec3(modelMatrix[0][3], modelMatrix[1][3], modelMatrix[2][3]);
 }
 
 Shader * GLObject::getShader()
 {
 	return shader;
-}
-
-glm::mat4 GLObject::getModelMatrix()
-{
-	glm::mat4 mat = glm::mat4(1.0f);
-	mat = glm::scale(mat, scaleVec);
-	mat = glm::rotate(mat, rotation.x, glm::vec3(1.0f, 0.0f, 0.0f));
-	mat = glm::rotate(mat, rotation.y, glm::vec3(0.0f, 1.0f, 0.0f));
-	mat = glm::rotate(mat, rotation.z, glm::vec3(0.0f, 0.0f, 1.0f));
-	mat = glm::translate(mat, translation);
-	return mat;
 }

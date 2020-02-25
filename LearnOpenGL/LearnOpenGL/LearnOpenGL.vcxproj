@@ -130,6 +130,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="glad.c" />
+    <ClCompile Include="GLDirectionLight.cpp" />
     <ClCompile Include="GLLightMapCube.cpp" />
     <ClCompile Include="GLLightObject.cpp" />
     <ClCompile Include="GLObject.cpp" />
@@ -147,6 +148,7 @@
     <ClInclude Include="Config.h" />
     <ClInclude Include="CubeVertexData.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="GLDirectionLight.h" />
     <ClInclude Include="GLLightMapCube.h" />
     <ClInclude Include="GLLightObject.h" />
     <ClInclude Include="GLObject.h" />
@@ -156,6 +158,7 @@
     <ClInclude Include="GLSimpleMaterial.h" />
     <ClInclude Include="GLSimpleRect.h" />
     <ClInclude Include="GLSimpleTexture.h" />
+    <ClInclude Include="GLSpotLightObject.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="LightInfo.h" />
     <ClInclude Include="Shader.h" />

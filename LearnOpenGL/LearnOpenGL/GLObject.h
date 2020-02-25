@@ -39,16 +39,11 @@ protected:
 	unsigned int VAO, VBO, EBO;
 	Shader* shader = NULL;
 
-	glm::vec3 translation = glm::vec3();
-	glm::vec3 rotation = glm::vec3();
-	glm::vec3 scaleVec = glm::vec3();
-
 	const static glm::vec3 defaultTranslation;
 	const static glm::vec3 defaultRotation;
 	const static glm::vec3 defaultScale;
 private:
-	glm::mat4 getModelMatrix();
-
+	glm::mat4 modelMatrix;
 };
 
 #endif

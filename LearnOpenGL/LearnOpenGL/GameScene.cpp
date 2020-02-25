@@ -207,13 +207,17 @@ void GameScene::setShaderUniform()
 
 			}
 			else if (lightType == Direction) {
-				//...
+				std::string sLightDirection = attrName + sIndex + ".direction";
+				objects[i]->getShader()->setVec3(sLightDirection,
+					((DirectionLight*)currLights[j]->getLight())->direction);
+				glm::vec3 d = ((DirectionLight*)currLights[j]->getLight())->direction;
 			}
 			else if (lightType == Spot) {
 				//...
 			}
 		}
 		objects[i]->getShader()->setInt("pointLightNum", point);
+		objects[i]->getShader()->setInt("dirLightNum", dir);
 	}
 }
 

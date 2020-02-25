@@ -54,11 +54,23 @@ int main() {
 	gameScene = new GameScene();
 	gameScene->setCamera(new Camera(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f)));
 	
-	GLLightObject* light = (GLLightObject*)gameScene->addLight(
-		new GLPointLight(glm::vec3(0.0f, 0.0f, 0.0f)));
-	light->setAmbient(glm::vec3(0.3f));
-	light->setDiffuse(glm::vec3(2.8f));
-	light->setSpecular(glm::vec3(0.5f));
+	GLLightObject* dirLight = (GLLightObject*)gameScene->addLight(
+		new GLDirectionLight(glm::vec3(-0.2f, -1.0f, -0.3f)));
+	dirLight->setAmbient(glm::vec3(0.1f));
+	dirLight->setDiffuse(glm::vec3(0.8f));
+	dirLight->setSpecular(glm::vec3(0.2f));
+
+	GLLightObject* dirLight2 = (GLLightObject*)gameScene->addLight(
+		new GLDirectionLight(glm::vec3(-0.2f, 1.0f, -0.3f)));
+	dirLight2->setAmbient(glm::vec3(0.1f));
+	dirLight2->setDiffuse(glm::vec3(0.8f));
+	dirLight2->setSpecular(glm::vec3(0.2f));
+
+	//GLLightObject* light = (GLLightObject*)gameScene->addLight(
+	//	new GLPointLight(glm::vec3(0.0f, 0.0f, 0.0f)));
+	//light->setAmbient(glm::vec3(0.3f));
+	//light->setDiffuse(glm::vec3(2.8f));
+	//light->setSpecular(glm::vec3(0.5f));
 
 	/*GLLightObject* light2 = (GLLightObject*)gameScene->addLight(
 		new GLPointLight());

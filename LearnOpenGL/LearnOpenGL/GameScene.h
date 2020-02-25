@@ -11,6 +11,7 @@
 #include "Camera.h"
 #include "GLObject.h"
 #include "GLLightObject.h"
+#include "GLDirectionLight.h"
 #include "GLPointLight.h"
 #include "GLSimpleCube.h"
 #include "GLSimpleLight.h"
