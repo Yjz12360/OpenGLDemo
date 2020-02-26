@@ -15,9 +15,9 @@ GLLightMapCube::GLLightMapCube(glm::vec3 translation, glm::vec3 rotation, glm::v
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, vertexAttribNum * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, vertexAttribNum * sizeof(float), (void*)(3 * sizeof(float)));
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, vertexAttribNum * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, vertexAttribNum * sizeof(float), (void*)(5 * sizeof(float)));
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, vertexAttribNum * sizeof(float), (void*)(6 * sizeof(float)));
 	glEnableVertexAttribArray(2);
 
 	shader = new Shader("lightMap.vs", "lightMap.fs");
@@ -30,10 +30,10 @@ void GLLightMapCube::render(glm::mat4 viewMatrix, glm::mat4 projMatrix)
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, diffuseTexture);
-	shader->setInt("material.diffuse", 0);
+	shader->setInt("material.texture_diffuse1", 0);
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, specularTexture);
-	shader->setInt("material.specular", 1);
+	shader->setInt("material.texture_specular1", 1);
 
 	shader->setFloat("material.shininess", 64.0f);
 
@@ -47,11 +47,11 @@ void GLLightMapCube::initVertexData()
 		vertexData[i * vertexAttribNum] = CUBE_VERTEX_DATA(i, PosX);
 		vertexData[i * vertexAttribNum + 1] = CUBE_VERTEX_DATA(i, PosY);
 		vertexData[i * vertexAttribNum + 2] = CUBE_VERTEX_DATA(i, PosZ);
-		vertexData[i * vertexAttribNum + 3] = CUBE_VERTEX_DATA(i, TexU);
-		vertexData[i * vertexAttribNum + 4] = CUBE_VERTEX_DATA(i, TexV);
-		vertexData[i * vertexAttribNum + 5] = CUBE_VERTEX_DATA(i, NormalX);
-		vertexData[i * vertexAttribNum + 6] = CUBE_VERTEX_DATA(i, NormalY);
-		vertexData[i * vertexAttribNum + 7] = CUBE_VERTEX_DATA(i, NormalZ);
+		vertexData[i * vertexAttribNum + 3] = CUBE_VERTEX_DATA(i, NormalX);
+		vertexData[i * vertexAttribNum + 4] = CUBE_VERTEX_DATA(i, NormalY);
+		vertexData[i * vertexAttribNum + 5] = CUBE_VERTEX_DATA(i, NormalZ);
+		vertexData[i * vertexAttribNum + 6] = CUBE_VERTEX_DATA(i, TexU);
+		vertexData[i * vertexAttribNum + 7] = CUBE_VERTEX_DATA(i, TexV);
 	}
 	indexData = new unsigned int[cubeIndexNum];
 	for (int i = 0; i < cubeIndexNum; ++i) {

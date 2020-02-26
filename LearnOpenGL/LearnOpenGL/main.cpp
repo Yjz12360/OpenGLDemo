@@ -90,9 +90,14 @@ int main() {
 	light3->setDiffuse(glm::vec3(0.5f));
 	light3->setSpecular(glm::vec3(0.2f));*/
 
+	GLObject* modelObject = new GLObject(glm::vec3(0.0f,-10.0f,-15.0f));
+	modelObject->loadModel("Resource/Model/nanosuit/nanosuit.obj");
+	modelObject->setShader("lightMap.vs", "lightMap.fs");
+	gameScene->addObject(modelObject);
 
-	GLLightMapCube* lightMapCube = (GLLightMapCube*)gameScene->addObject(
-		new GLLightMapCube(glm::vec3(0.0f, 0.0f, 0.0f)));
+
+	//GLLightMapCube* lightMapCube = (GLLightMapCube*)gameScene->addObject(
+	//	new GLLightMapCube(glm::vec3(0.0f, 0.0f, 0.0f)));
 	/*GLSimpleMaterial* material = (GLSimpleMaterial*)gameScene->addObject(
 		new GLSimpleMaterial(glm::vec3(0.0f, -1.0f, 0.0f)));
 	material->setMaterial(Material(
@@ -101,8 +106,8 @@ int main() {
 		glm::vec3(1.0f, 0.5f, 0.31f),
 		32.0f
 	));*/
-	gameScene->addObject(new GLSimpleCube(glm::vec3(-5.0f, 1.0f, 0.0f)));
-	gameScene->addObject(new GLSimpleCube(glm::vec3(1.0f, 1.0f, 0.0f)));
+	/*gameScene->addObject(new GLSimpleCube(glm::vec3(-5.0f, 1.0f, 0.0f)));
+	gameScene->addObject(new GLSimpleCube(glm::vec3(1.0f, 1.0f, 0.0f)));*/
 	gameScene->start();
 
 	double timeLast = glfwGetTime();

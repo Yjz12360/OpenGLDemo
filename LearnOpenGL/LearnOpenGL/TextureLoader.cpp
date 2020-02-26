@@ -10,11 +10,16 @@ void TextureLoader::init()
 	stbi_set_flip_vertically_on_load(true);
 }
 
+void TextureLoader::loadTexture(unsigned int & texture, std::string path)
+{
+	loadTexture(texture, path.c_str());
+}
+
 void TextureLoader::loadTexture(unsigned int & texture, const char * path)
 {
 	int width, height, nrChannels;
 	glGenTextures(1, &texture);
-		unsigned char *data = stbi_load(path, &width, &height, &nrChannels, 0);
+	unsigned char *data = stbi_load(path, &width, &height, &nrChannels, 0);
 	if (data) {
 		GLenum format;
 		if (nrChannels == 1)format = GL_RED;

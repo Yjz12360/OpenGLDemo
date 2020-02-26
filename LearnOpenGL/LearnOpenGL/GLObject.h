@@ -13,7 +13,7 @@
 #include "Config.h"
 #include "Shader.h"
 #include "TextureLoader.h"
-
+#include "Model.h"
 
 class GLObject {
 public:
@@ -34,8 +34,11 @@ public:
 
 	void lookAt(glm::vec3 direction);
 
+	void loadModel(const char* path);
+
 	glm::vec3 getTranslation();
 
+	void setShader(const char* vsPath, const char* fsPath);
 	Shader* getShader();
 protected:
 	unsigned int VAO, VBO, EBO;
@@ -46,6 +49,7 @@ protected:
 	const static glm::vec3 defaultScale;
 private:
 	glm::mat4 modelMatrix;
+	Model* model = NULL;
 };
 
 #endif

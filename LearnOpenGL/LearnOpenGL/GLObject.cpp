@@ -27,6 +27,9 @@ GLObject::~GLObject()
 	if (shader != NULL) {
 		delete shader;
 	}
+	if (model != NULL) {
+		delete model;
+	}
 }
 
 void GLObject::start()
@@ -40,7 +43,13 @@ void GLObject::render(glm::mat4 viewMatrix, glm::mat4 projMatrix)
 		shader->setMatrix4("model", modelMatrix);
 		shader->setMatrix4("view", viewMatrix);
 		shader->setMatrix4("projection", projMatrix);
+
+		if (model != NULL) {
+			shader->setFloat("material.shininess", 64.0f);
+			model->Draw(*shader);
+		}
 	}
+
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 }
@@ -80,10 +89,26 @@ void GLObject::lookAt(glm::vec3 direction)
 	modelMatrix = glm::lookAt(pos, pos + direction, glm::vec3(0.0f, 1.0f, 0.0f));
 }
 
+void GLObject::loadModel(const char * path)
+{
+	if (model != NULL) {
+		delete model;
+	}
+	model = new Model((char*)path);
+}
+
 glm::vec3 GLObject::getTranslation()
 {
 	return glm::vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);
 	//return glm::vec3(modelMatrix[0][3], modelMatrix[1][3], modelMatrix[2][3]);
+}
+
+void GLObject::setShader(const char * vsPath, const char * fsPath)
+{
+	if (shader != NULL) {
+		delete shader;
+	}
+	shader = new Shader(vsPath, fsPath);
 }
 
 Shader * GLObject::getShader()

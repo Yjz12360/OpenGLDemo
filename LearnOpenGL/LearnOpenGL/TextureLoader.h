@@ -12,6 +12,7 @@
 class TextureLoader {
 public:
 	static void init();
+	static void loadTexture(unsigned int& texture, std::string path);
 	static void loadTexture(unsigned int& texture, const char* path);
 	static void setWrap(unsigned int wrap);
 	static void setMinFilter(unsigned int filter);
