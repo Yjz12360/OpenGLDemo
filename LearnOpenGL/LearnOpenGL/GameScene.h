@@ -7,6 +7,7 @@
 #include<GLFW/glfw3.h>
 #include<string>
 #include<string.h>
+#include<map>
 
 #include "Camera.h"
 #include "GLObject.h"
@@ -21,6 +22,8 @@
 #include "GLLightMapCube.h"
 #include "GLFrameCube.h"
 #include "GLCubeBorder.h"
+#include "GLAlphaTexture.h"
+#include "GLBlendingTexture.h"
 
 const unsigned int MAX_OBJECT_NUM = 100;
 const unsigned int MAX_CAMERA_NUM = 3;
@@ -47,6 +50,7 @@ public:
 private:
 	int getAvailObjIndex();
 	int getAvailLightIndex();
+	map<float, int> getSortedObjByDistance();
 
 	void setShaderUniform();
 

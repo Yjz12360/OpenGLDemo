@@ -45,6 +45,7 @@ int main() {
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_STENCIL_TEST);
 	glStencilMask(0xFF);
+	glEnable(GL_BLEND);
 	//glDepthMask(GL_FALSE);
 
 	TextureLoader::init();
@@ -55,6 +56,8 @@ int main() {
 	GLSimpleMaterial::initVertexData();
 	GLLightMapCube::initVertexData();
 	GLCubeBorder::initVertexData();
+	GLAlphaTexture::initVertexData();
+	GLBlendingTexture::initVertexData();
 
 	gameScene = new GameScene();
 	gameScene->setCamera(new Camera(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f)));
@@ -101,8 +104,18 @@ int main() {
 
 
 	GLLightMapCube* lightMapCube = (GLLightMapCube*)gameScene->addObject(
-		new GLLightMapCube(glm::vec3(0.0f, 0.0f, 0.0f)));
+		new GLLightMapCube(glm::vec3(0.0f, 0.0f, -2.0f)));
 
+	/*GLAlphaTexture* alphaTexture = (GLAlphaTexture*)gameScene->addObject(new GLAlphaTexture(
+		glm::vec3(0.0f,0.0f,-0.2f)));*/
+	GLBlendingTexture* blendingTexture = (GLBlendingTexture*)gameScene->addObject(new GLBlendingTexture(
+		glm::vec3(0.0f, 0.0f, -0.2f)));
+
+	GLBlendingTexture* blendingTexture2 = (GLBlendingTexture*)gameScene->addObject(new GLBlendingTexture(
+		glm::vec3(0.5f, 0.5f, -0.3f)));
+
+	GLBlendingTexture* blendingTexture3 = (GLBlendingTexture*)gameScene->addObject(new GLBlendingTexture(
+		glm::vec3(-0.5f, -0.5f, -0.4f)));
 	//GLLightMapCube* lightMapCube2 = (GLLightMapCube*)gameScene->addObject(
 	//	new GLLightMapCube(glm::vec3(1.2f, 0.0f, 0.0f)));
 

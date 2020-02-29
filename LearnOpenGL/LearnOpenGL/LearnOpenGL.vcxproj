@@ -127,6 +127,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GLBlendingTexture.cpp" />
+    <ClCompile Include="GLAlphaTexture.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="glad.c" />
@@ -149,6 +151,8 @@
     <ClCompile Include="TextureLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GLBlendingTexture.h" />
+    <ClInclude Include="GLAlphaTexture.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="CubeVertexData.h" />
@@ -170,12 +174,18 @@
     <ClInclude Include="LightInfo.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="Rect2DVertexData.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="TextureLoader.h" />
+    <ClInclude Include="VertexAttr.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="alphaTexture.fs" />
+    <None Include="alphaTexture.vs" />
+    <None Include="blendingTexture.fs" />
+    <None Include="blendingTexture.vs" />
     <None Include="border.fs" />
     <None Include="border.vs" />
     <None Include="lightMap.fs" />

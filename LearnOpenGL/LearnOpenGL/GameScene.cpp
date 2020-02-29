@@ -96,9 +96,10 @@ void GameScene::render()
 void GameScene::render(glm::mat4 viewMatrix, glm::mat4 projMatrix)
 {
 	setShaderUniform();
-	for (int i = 0; i < MAX_OBJECT_NUM; ++i) {
-		if (objects[i] == NULL) continue;
-		objects[i]->render(viewMatrix, projMatrix);
+	map<float, int>sorted = getSortedObjByDistance();
+	for (std::map<float, int>::reverse_iterator it = sorted.rbegin(); it != sorted.rend(); ++it) {
+		if (objects[it->second] == NULL) continue;
+		objects[it->second]->render(viewMatrix, projMatrix);
 	}
 	for (int i = 0; i < MAX_LIGHT_NUM; ++i) {
 		if (lights[i] == NULL)  continue;
@@ -155,6 +156,17 @@ int GameScene::getAvailLightIndex()
 		}
 	}
 	return -1;
+}
+
+map<float, int> GameScene::getSortedObjByDistance()
+{
+	map<float, int> result;
+	for (int i = 0; i < MAX_OBJECT_NUM; ++i) {
+		if (objects[i] == NULL)  continue;
+		float distance = glm::distance(objects[i]->getTranslation(), camera->getPos());
+		result[distance] = i;
+	}
+	return result;
 }
 
 void GameScene::setShaderUniform()

@@ -90,6 +90,12 @@
     <ClCompile Include="GLCubeBorder.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="GLAlphaTexture.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GLBlendingTexture.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Shader.h">
@@ -167,6 +173,18 @@
     <ClInclude Include="GLCubeBorder.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="VertexAttr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Rect2DVertexData.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GLAlphaTexture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GLBlendingTexture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shader.vs">
@@ -209,6 +227,18 @@
       <Filter>资源文件\vShader</Filter>
     </None>
     <None Include="border.fs">
+      <Filter>资源文件\fShader</Filter>
+    </None>
+    <None Include="alphaTexture.vs">
+      <Filter>资源文件\vShader</Filter>
+    </None>
+    <None Include="alphaTexture.fs">
+      <Filter>资源文件\fShader</Filter>
+    </None>
+    <None Include="blendingTexture.vs">
+      <Filter>资源文件\vShader</Filter>
+    </None>
+    <None Include="blendingTexture.fs">
       <Filter>资源文件\fShader</Filter>
     </None>
   </ItemGroup>
