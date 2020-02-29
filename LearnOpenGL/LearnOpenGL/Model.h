@@ -9,8 +9,10 @@
 
 class Model {
 public:
-	Model(char* path);
+	Model(char* path = NULL);
 	void Draw(Shader shader);
+
+	
 private:
 	vector<Texture> texturesLoaded;
 	vector<Mesh>meshes;

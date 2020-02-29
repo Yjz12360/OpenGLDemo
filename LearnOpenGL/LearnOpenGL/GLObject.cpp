@@ -22,6 +22,18 @@ GLObject::GLObject(glm::vec3 translation, glm::vec3 rotation, glm::vec3 scale)
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 }
 
+GLObject::GLObject(const char * modelPath, glm::vec3 translation, glm::vec3 rotation, glm::vec3 scale)
+{
+	modelMatrix = glm::mat4(1.0f);
+	modelMatrix = glm::scale(modelMatrix, glm::vec3(scale));
+	modelMatrix = glm::rotate(modelMatrix, rotation.x, glm::vec3(1.0f, 0.0f, 0.0f));
+	modelMatrix = glm::rotate(modelMatrix, rotation.y, glm::vec3(0.0f, 1.0f, 0.0f));
+	modelMatrix = glm::rotate(modelMatrix, rotation.z, glm::vec3(0.0f, 0.0f, 1.0f));
+	modelMatrix = glm::translate(modelMatrix, translation);
+
+	loadModel(modelPath);
+}
+
 GLObject::~GLObject()
 {
 	if (shader != NULL) {
@@ -50,8 +62,11 @@ void GLObject::render(glm::mat4 viewMatrix, glm::mat4 projMatrix)
 		}
 	}
 
-	glBindVertexArray(VAO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	if (model == NULL) {
+		glBindVertexArray(VAO);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	}
+
 }
 
 void GLObject::update(float deltaTime)

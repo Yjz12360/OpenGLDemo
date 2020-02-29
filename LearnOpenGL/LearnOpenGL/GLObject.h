@@ -21,6 +21,10 @@ public:
 	GLObject(glm::vec3 translation = defaultTranslation,
 		glm::vec3 rotation = defaultRotation,
 		glm::vec3 scale = defaultScale);
+	GLObject(const char* modelPath,
+		glm::vec3 translation = defaultTranslation,
+		glm::vec3 rotation = defaultRotation,
+		glm::vec3 scale = defaultScale);
 	~GLObject();
 	virtual void start();
 	virtual void render(glm::mat4 viewMatrix, glm::mat4 projMatrix);
@@ -34,7 +38,7 @@ public:
 
 	void lookAt(glm::vec3 direction);
 
-	void loadModel(const char* path);
+	
 
 	glm::vec3 getTranslation();
 
@@ -48,6 +52,8 @@ protected:
 	const static glm::vec3 defaultRotation;
 	const static glm::vec3 defaultScale;
 private:
+	void loadModel(const char* path);
+
 	glm::mat4 modelMatrix;
 	Model* model = NULL;
 };

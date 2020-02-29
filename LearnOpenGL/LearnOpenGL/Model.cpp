@@ -2,6 +2,9 @@
 
 Model::Model(char * path)
 {
+	if (path == NULL) {
+		return;
+	}
 	loadModel(path);
 }
 
