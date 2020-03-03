@@ -24,6 +24,8 @@
 #include "GLCubeBorder.h"
 #include "GLAlphaTexture.h"
 #include "GLBlendingTexture.h"
+#include "OffScreenRenderer.h"
+#include "GLPostProcessingRect.h"
 
 const unsigned int MAX_OBJECT_NUM = 100;
 const unsigned int MAX_CAMERA_NUM = 3;
@@ -39,6 +41,8 @@ public:
 
 	void setCamera(Camera* camera);
 	Camera* getCamera();
+
+	void setPostProcessing(const char* vs, const char* fs);
 
 	void start();
 	void update(float deltaTime);
@@ -58,6 +62,9 @@ private:
 	Camera* camera;
 	GLObject* objects[MAX_OBJECT_NUM];
 	GLLightObject* lights[MAX_LIGHT_NUM];
+
+	OffScreenRenderer* offScreen;
+	GLPostProcessingRect* postProcessing;
 };
 
 

@@ -25,7 +25,7 @@ int main() {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	GLFWwindow* window = glfwCreateWindow(SRC_WIDTH, SRC_HEIGHT, "LearnOpenGL", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LearnOpenGL", NULL, NULL);
 	if (window == NULL) {
 		std::cout << "Failed to create GLFW window" << std::endl;
 		glfwTerminate();
@@ -38,7 +38,7 @@ int main() {
 		return -1;
 	}
 
-	glViewport(0, 0, SRC_WIDTH, SRC_HEIGHT);
+	glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	glfwSetCursorPosCallback(window, mouse_callback);
@@ -59,15 +59,19 @@ int main() {
 	GLCubeBorder::initVertexData();
 	GLAlphaTexture::initVertexData();
 	GLBlendingTexture::initVertexData();
+	GLPostProcessingRect::initVertexData();
 
 	gameScene = new GameScene();
+	gameScene->setPostProcessing("postProcessing.vs", "blur.fs");
 	gameScene->setCamera(new Camera(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f)));
-	
+
 	/*GLLightObject* spotLight = gameScene->addLight(
 		new GLSpotLight(glm::vec3(0.0f, 0.0f, 2.0f), glm::vec3(0.0f, 0.0f, -1.0f)));
 	spotLight->setAmbient(glm::vec3(0.1f));
 	spotLight->setDiffuse(glm::vec3(0.5f));
 	spotLight->setSpecular(glm::vec3(0.2f));*/
+
+
 	GLLightObject* dirLight = (GLLightObject*)gameScene->addLight(
 		new GLDirectionLight(glm::vec3(-0.2f, -1.0f, -0.3f)));
 	dirLight->setAmbient(glm::vec3(0.1f));
@@ -109,6 +113,7 @@ int main() {
 
 	/*GLAlphaTexture* alphaTexture = (GLAlphaTexture*)gameScene->addObject(new GLAlphaTexture(
 		glm::vec3(0.0f,0.0f,-0.2f)));*/
+
 	GLBlendingTexture* blendingTexture = (GLBlendingTexture*)gameScene->addObject(new GLBlendingTexture(
 		glm::vec3(0.0f, 0.0f, -0.2f)));
 
@@ -117,6 +122,7 @@ int main() {
 
 	GLBlendingTexture* blendingTexture3 = (GLBlendingTexture*)gameScene->addObject(new GLBlendingTexture(
 		glm::vec3(-0.5f, -0.5f, -0.4f)));
+
 	//GLLightMapCube* lightMapCube2 = (GLLightMapCube*)gameScene->addObject(
 	//	new GLLightMapCube(glm::vec3(1.2f, 0.0f, 0.0f)));
 
@@ -192,7 +198,7 @@ void update(float timeDelta) {
 }
 
 void render() {
-	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	gameScene->render();
 }

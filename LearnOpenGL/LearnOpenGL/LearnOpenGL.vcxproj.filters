@@ -96,6 +96,12 @@
     <ClCompile Include="GLBlendingTexture.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="OffScreenRenderer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GLPostProcessingRect.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Shader.h">
@@ -185,6 +191,12 @@
     <ClInclude Include="GLBlendingTexture.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="OffScreenRenderer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GLPostProcessingRect.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shader.vs">
@@ -239,6 +251,24 @@
       <Filter>资源文件\vShader</Filter>
     </None>
     <None Include="blendingTexture.fs">
+      <Filter>资源文件\fShader</Filter>
+    </None>
+    <None Include="inversion.fs">
+      <Filter>资源文件\fShader</Filter>
+    </None>
+    <None Include="postProcessing.vs">
+      <Filter>资源文件\vShader</Filter>
+    </None>
+    <None Include="grayScale.fs">
+      <Filter>资源文件\fShader</Filter>
+    </None>
+    <None Include="sharpen.fs">
+      <Filter>资源文件\fShader</Filter>
+    </None>
+    <None Include="blur.fs">
+      <Filter>资源文件\fShader</Filter>
+    </None>
+    <None Include="edgeDetection.fs">
       <Filter>资源文件\fShader</Filter>
     </None>
   </ItemGroup>

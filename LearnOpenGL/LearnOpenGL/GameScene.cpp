@@ -9,6 +9,9 @@ GameScene::GameScene()
 		lights[i] = NULL;
 	}
 	camera = NULL;
+
+	offScreen = NULL;
+	postProcessing = NULL;
 }
 
 GameScene::~GameScene()
@@ -25,6 +28,12 @@ GameScene::~GameScene()
 	}
 	if (camera != NULL) {
 		delete camera;
+	}
+	if (offScreen != NULL) {
+		delete offScreen;
+	}
+	if (postProcessing != NULL) {
+		delete postProcessing;
 	}
 }
 
@@ -58,6 +67,20 @@ void GameScene::setCamera(Camera * camera)
 Camera * GameScene::getCamera()
 {
 	return camera;
+}
+
+void GameScene::setPostProcessing(const char * vs, const char * fs)
+{
+	if (offScreen == NULL) {
+		offScreen = new OffScreenRenderer();
+	}
+	if (postProcessing == NULL) {
+		postProcessing = new GLPostProcessingRect(vs, fs);
+	}
+	else {
+		postProcessing->setShader(vs, fs);
+	}
+	
 }
 
 void GameScene::start()
@@ -95,6 +118,10 @@ void GameScene::render()
 
 void GameScene::render(glm::mat4 viewMatrix, glm::mat4 projMatrix)
 {
+	if (offScreen != NULL) {
+		offScreen->setOffScreen(true);
+	}
+
 	setShaderUniform();
 	map<float, int>sorted = getSortedObjByDistance();
 	for (std::map<float, int>::reverse_iterator it = sorted.rbegin(); it != sorted.rend(); ++it) {
@@ -104,6 +131,12 @@ void GameScene::render(glm::mat4 viewMatrix, glm::mat4 projMatrix)
 	for (int i = 0; i < MAX_LIGHT_NUM; ++i) {
 		if (lights[i] == NULL)  continue;
 		lights[i]->render(viewMatrix, projMatrix);
+	}
+
+	if (offScreen != NULL and postProcessing != NULL) {
+		offScreen->setOffScreen(false);
+		postProcessing->setTextureBuffer(offScreen->getTextureBuffer());
+		postProcessing->renderPostProcess();
 	}
 }
 
