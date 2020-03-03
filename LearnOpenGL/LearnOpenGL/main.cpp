@@ -46,6 +46,7 @@ int main() {
 	glEnable(GL_STENCIL_TEST);
 	glStencilMask(0xFF);
 	glEnable(GL_BLEND);
+	glEnable(GL_CULL_FACE);
 	//glDepthMask(GL_FALSE);
 
 	TextureLoader::init();

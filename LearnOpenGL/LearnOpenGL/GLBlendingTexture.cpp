@@ -23,6 +23,7 @@ GLBlendingTexture::GLBlendingTexture(glm::vec3 translation, glm::vec3 rotation, 
 void GLBlendingTexture::render(glm::mat4 viewMatrix, glm::mat4 projMatrix)
 {
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glDisable(GL_CULL_FACE);
 
 	GLObject::render(viewMatrix, projMatrix);
 
@@ -31,6 +32,8 @@ void GLBlendingTexture::render(glm::mat4 viewMatrix, glm::mat4 projMatrix)
 	shader->setInt("texture", 0);
 
 	glDrawElements(GL_TRIANGLES, indexNum, GL_UNSIGNED_INT, 0);
+
+	glEnable(GL_CULL_FACE);
 }
 
 void GLBlendingTexture::initVertexData()
