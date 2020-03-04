@@ -145,6 +145,7 @@
     <ClCompile Include="GLSimpleMaterial.cpp" />
     <ClCompile Include="GLSimpleRect.cpp" />
     <ClCompile Include="GLSimpleTexture.cpp" />
+    <ClCompile Include="GLSkyBox.cpp" />
     <ClCompile Include="GLSpotLight.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
@@ -172,6 +173,7 @@
     <ClInclude Include="GLSimpleMaterial.h" />
     <ClInclude Include="GLSimpleRect.h" />
     <ClInclude Include="GLSimpleTexture.h" />
+    <ClInclude Include="GLSkyBox.h" />
     <ClInclude Include="GLSpotLight.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="LightInfo.h" />
@@ -210,6 +212,8 @@
     <None Include="simpleMaterial.vs" />
     <None Include="simpleTex.fs" />
     <None Include="simpleTex.vs" />
+    <None Include="skybox.fs" />
+    <None Include="skybox.vs" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="boxDiffuse.jpg" />

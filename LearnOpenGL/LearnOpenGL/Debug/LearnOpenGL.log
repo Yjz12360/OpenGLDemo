@@ -1,9 +1,2 @@
-﻿  main.cpp
-d:\vs2017project\projects\learnopengl3\learnopengl\learnopengl\main.cpp(76): warning C4316: “GLDirectionLight”: 在堆上分配的对象可能不是对齐 16
-d:\vs2017project\projects\learnopengl3\learnopengl\learnopengl\main.cpp(82): warning C4316: “GLDirectionLight”: 在堆上分配的对象可能不是对齐 16
-d:\vs2017project\projects\learnopengl3\learnopengl\learnopengl\main.cpp(112): warning C4316: “GLLightMapCube”: 在堆上分配的对象可能不是对齐 16
-d:\vs2017project\projects\learnopengl3\learnopengl\learnopengl\main.cpp(118): warning C4316: “GLBlendingTexture”: 在堆上分配的对象可能不是对齐 16
-d:\vs2017project\projects\learnopengl3\learnopengl\learnopengl\main.cpp(121): warning C4316: “GLBlendingTexture”: 在堆上分配的对象可能不是对齐 16
-d:\vs2017project\projects\learnopengl3\learnopengl\learnopengl\main.cpp(124): warning C4316: “GLBlendingTexture”: 在堆上分配的对象可能不是对齐 16
-d:\vs2017project\projects\learnopengl3\learnopengl\learnopengl\main.cpp(156): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+﻿  TextureLoader.cpp
   LearnOpenGL.vcxproj -> D:\VS2017Project\Projects\LearnOpenGL3\LearnOpenGL\Debug\LearnOpenGL.exe

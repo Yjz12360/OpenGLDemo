@@ -102,6 +102,9 @@
     <ClCompile Include="GLPostProcessingRect.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="GLSkyBox.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Shader.h">
@@ -197,6 +200,9 @@
     <ClInclude Include="GLPostProcessingRect.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="GLSkyBox.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shader.vs">
@@ -269,6 +275,12 @@
       <Filter>资源文件\fShader</Filter>
     </None>
     <None Include="edgeDetection.fs">
+      <Filter>资源文件\fShader</Filter>
+    </None>
+    <None Include="skybox.vs">
+      <Filter>资源文件\vShader</Filter>
+    </None>
+    <None Include="skybox.fs">
       <Filter>资源文件\fShader</Filter>
     </None>
   </ItemGroup>

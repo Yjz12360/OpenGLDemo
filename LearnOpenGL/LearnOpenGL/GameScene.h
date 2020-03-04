@@ -26,6 +26,7 @@
 #include "GLBlendingTexture.h"
 #include "OffScreenRenderer.h"
 #include "GLPostProcessingRect.h"
+#include "GLSkyBox.h"
 
 const unsigned int MAX_OBJECT_NUM = 100;
 const unsigned int MAX_CAMERA_NUM = 3;
