@@ -43,6 +43,8 @@ public:
 	void setCamera(Camera* camera);
 	Camera* getCamera();
 
+	void setSkyBox(GLSkyBox* skyBox);
+
 	void setPostProcessing(const char* vs, const char* fs);
 
 	void start();
@@ -59,7 +61,7 @@ private:
 
 	void setShaderUniform();
 
-
+	GLSkyBox* skyBox;
 	Camera* camera;
 	GLObject* objects[MAX_OBJECT_NUM];
 	GLLightObject* lights[MAX_LIGHT_NUM];

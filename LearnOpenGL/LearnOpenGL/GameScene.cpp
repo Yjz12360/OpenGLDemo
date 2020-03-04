@@ -9,6 +9,7 @@ GameScene::GameScene()
 		lights[i] = NULL;
 	}
 	camera = NULL;
+	skyBox = NULL;
 
 	offScreen = NULL;
 	postProcessing = NULL;
@@ -28,6 +29,9 @@ GameScene::~GameScene()
 	}
 	if (camera != NULL) {
 		delete camera;
+	}
+	if (skyBox != NULL) {
+		delete skyBox;
 	}
 	if (offScreen != NULL) {
 		delete offScreen;
@@ -67,6 +71,11 @@ void GameScene::setCamera(Camera * camera)
 Camera * GameScene::getCamera()
 {
 	return camera;
+}
+
+void GameScene::setSkyBox(GLSkyBox * skyBox)
+{
+	this->skyBox = skyBox;
 }
 
 void GameScene::setPostProcessing(const char * vs, const char * fs)
@@ -132,6 +141,9 @@ void GameScene::render(glm::mat4 viewMatrix, glm::mat4 projMatrix)
 		if (lights[i] == NULL)  continue;
 		lights[i]->render(viewMatrix, projMatrix);
 	}
+	if (skyBox != NULL) {
+		skyBox->render(viewMatrix, projMatrix);
+	}
 
 	if (offScreen != NULL and postProcessing != NULL) {
 		offScreen->setOffScreen(false);
@@ -143,7 +155,7 @@ void GameScene::render(glm::mat4 viewMatrix, glm::mat4 projMatrix)
 void GameScene::handleKeyInput(GLFWwindow* window)
 {
 	if (camera != NULL) {
-		float cameraSpeed = 0.001f;
+		float cameraSpeed = 0.005f;
 		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 			camera->moveFront(cameraSpeed);
 		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
@@ -222,7 +234,12 @@ void GameScene::setShaderUniform()
 	for (int i = 0; i < MAX_OBJECT_NUM; ++i) {
 		if (objects[i] == NULL || (!objects[i]->getShader())) continue;
 		objects[i]->getShader()->use();
-		objects[i]->getShader()->setVec3("viewPos", getCamera()->getPos());
+		if (camera != NULL) {
+			objects[i]->getShader()->setVec3("viewPos", camera->getPos());
+		}
+		if (skyBox != NULL) {
+			skyBox->addTextureToShader(objects[i]->getShader());
+		}
 		for (int j = 0; j < lightCount; ++j) {
 			std::string attrName = "";
 			LightType lightType = currLights[j]->getLightType();

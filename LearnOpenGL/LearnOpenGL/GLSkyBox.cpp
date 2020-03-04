@@ -3,7 +3,7 @@
 float* GLSkyBox::vertexData = NULL;
 unsigned int* GLSkyBox::indexData = NULL;
 
-GLSkyBox::GLSkyBox()
+GLSkyBox::GLSkyBox(const char* path)
 	:GLObject()
 {
 	TextureLoader::setMinFilter(GL_LINEAR);
@@ -11,7 +11,7 @@ GLSkyBox::GLSkyBox()
 	TextureLoader::setWrap(GL_CLAMP_TO_EDGE);
 	//TextureLoader::setWrap(GL_REPEAT);
 
-	TextureLoader::loadCubeTexture(cubeTexture, "SkyBox/SkyBox1");
+	TextureLoader::loadCubeTexture(cubeTexture, path);
 
 	glBufferData(GL_ARRAY_BUFFER, vertexDataSize, vertexData, GL_STATIC_DRAW);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexDataSize, indexData, GL_STATIC_DRAW);
@@ -35,6 +35,14 @@ void GLSkyBox::render(glm::mat4 viewMatrix, glm::mat4 projMatrix)
 	glDrawElements(GL_TRIANGLES, indexNum, GL_UNSIGNED_INT, 0);
 	glDepthFunc(GL_LESS);
 	glDepthMask(GL_TRUE);
+}
+
+void GLSkyBox::addTextureToShader(Shader * shader)
+{
+	if (shader == NULL) return;
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, cubeTexture);
+	shader->setInt("skybox", 0);
 }
 
 void GLSkyBox::initVertexData()

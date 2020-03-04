@@ -65,6 +65,8 @@ int main() {
 	//gameScene->setPostProcessing("postProcessing.vs", "blur.fs");
 	gameScene->setCamera(new Camera(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f)));
 
+	gameScene->setSkyBox(new GLSkyBox("SkyBox/SkyBox1"));
+
 	/*GLLightObject* spotLight = gameScene->addLight(
 		new GLSpotLight(glm::vec3(0.0f, 0.0f, 2.0f), glm::vec3(0.0f, 0.0f, -1.0f)));
 	spotLight->setAmbient(glm::vec3(0.1f));
@@ -107,11 +109,13 @@ int main() {
 	modelObject->setShader("lightMap.vs", "lightMap.fs");
 	gameScene->addObject(modelObject);*/
 
+	GLObject* reflectionModel = new GLObject("Resource/Model/nanosuit/nanosuit.obj",
+		glm::vec3(0.0f, -10.0f, -15.0f));
+	reflectionModel->setShader("refraction.vs", "refraction.fs");
+	gameScene->addObject(reflectionModel);
 
-	GLLightMapCube* lightMapCube = (GLLightMapCube*)gameScene->addObject(
-		new GLLightMapCube(glm::vec3(0.0f, 0.0f, -2.0f)));
-
-	GLSkyBox* skybox = (GLSkyBox*)gameScene->addObject(new GLSkyBox());
+	/*GLLightMapCube* lightMapCube = (GLLightMapCube*)gameScene->addObject(
+		new GLLightMapCube(glm::vec3(0.0f, 0.0f, -2.0f)));*/
 
 	/*GLAlphaTexture* alphaTexture = (GLAlphaTexture*)gameScene->addObject(new GLAlphaTexture(
 		glm::vec3(0.0f,0.0f,-0.2f)));*/

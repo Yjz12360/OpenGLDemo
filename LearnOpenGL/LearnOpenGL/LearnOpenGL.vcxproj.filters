@@ -283,6 +283,18 @@
     <None Include="skybox.fs">
       <Filter>资源文件\fShader</Filter>
     </None>
+    <None Include="reflection.vs">
+      <Filter>资源文件\vShader</Filter>
+    </None>
+    <None Include="reflection.fs">
+      <Filter>资源文件\fShader</Filter>
+    </None>
+    <None Include="refraction.vs">
+      <Filter>资源文件\vShader</Filter>
+    </None>
+    <None Include="refraction.fs">
+      <Filter>资源文件\fShader</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="tex.jpg">

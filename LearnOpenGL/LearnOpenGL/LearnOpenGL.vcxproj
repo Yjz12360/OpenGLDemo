@@ -201,6 +201,10 @@
     <None Include="postProcessing.vs" />
     <None Include="lightMap.fs" />
     <None Include="lightMap.vs" />
+    <None Include="reflection.fs" />
+    <None Include="reflection.vs" />
+    <None Include="refraction.fs" />
+    <None Include="refraction.vs" />
     <None Include="shader.fs" />
     <None Include="shader.vs" />
     <None Include="sharpen.fs" />

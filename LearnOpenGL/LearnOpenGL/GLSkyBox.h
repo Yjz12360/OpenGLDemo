@@ -6,9 +6,11 @@
 
 class GLSkyBox :public GLObject {
 public:
-	GLSkyBox();
+	GLSkyBox(const char* path);
 
 	virtual void render(glm::mat4 viewMatrix, glm::mat4 projMatrix);
+
+	void addTextureToShader(Shader* shader);
 
 	static void initVertexData();
 
