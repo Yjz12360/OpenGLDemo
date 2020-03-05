@@ -127,10 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DemoGameScene.cpp" />
     <ClCompile Include="GLBlendingTexture.cpp" />
     <ClCompile Include="GLAlphaTexture.cpp" />
     <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="BaseGameScene.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="GLCubeBorder.cpp" />
     <ClCompile Include="GLDirectionLight.cpp" />
@@ -147,6 +148,7 @@
     <ClCompile Include="GLSimpleTexture.cpp" />
     <ClCompile Include="GLSkyBox.cpp" />
     <ClCompile Include="GLSpotLight.cpp" />
+    <ClCompile Include="Initializer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
@@ -154,12 +156,13 @@
     <ClCompile Include="TextureLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DemoGameScene.h" />
     <ClInclude Include="GLBlendingTexture.h" />
     <ClInclude Include="GLAlphaTexture.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="CubeVertexData.h" />
-    <ClInclude Include="GameScene.h" />
+    <ClInclude Include="BaseGameScene.h" />
     <ClInclude Include="GLCubeBorder.h" />
     <ClInclude Include="GLDirectionLight.h" />
     <ClInclude Include="GLFrameCube.h" />
@@ -175,6 +178,7 @@
     <ClInclude Include="GLSimpleTexture.h" />
     <ClInclude Include="GLSkyBox.h" />
     <ClInclude Include="GLSpotLight.h" />
+    <ClInclude Include="Initializer.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="LightInfo.h" />
     <ClInclude Include="Mesh.h" />

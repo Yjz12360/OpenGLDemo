@@ -1,6 +1,6 @@
-#include "GameScene.h"
+#include "BaseGameScene.h"
 
-GameScene::GameScene()
+BaseGameScene::BaseGameScene()
 {
 	for (int i = 0; i < MAX_OBJECT_NUM; ++i) {
 		objects[i] = NULL;
@@ -15,7 +15,7 @@ GameScene::GameScene()
 	postProcessing = NULL;
 }
 
-GameScene::~GameScene()
+BaseGameScene::~BaseGameScene()
 {
 	for (int i = 0; i < MAX_OBJECT_NUM; ++i) {
 		if (objects[i] != NULL) {
@@ -41,7 +41,7 @@ GameScene::~GameScene()
 	}
 }
 
-GLObject* GameScene::addObject(GLObject * object)
+GLObject* BaseGameScene::addObject(GLObject * object)
 {
 	int index = getAvailObjIndex();
 	if (index == -1) {
@@ -52,7 +52,7 @@ GLObject* GameScene::addObject(GLObject * object)
 	return object;
 }
 
-GLLightObject * GameScene::addLight(GLLightObject * light)
+GLLightObject * BaseGameScene::addLight(GLLightObject * light)
 {
 	int index = getAvailLightIndex();
 	if (index == -1) {
@@ -63,22 +63,22 @@ GLLightObject * GameScene::addLight(GLLightObject * light)
 	return light;
 }
 
-void GameScene::setCamera(Camera * camera)
+void BaseGameScene::setCamera(Camera * camera)
 {
 	this->camera = camera;
 }
 
-Camera * GameScene::getCamera()
+Camera * BaseGameScene::getCamera()
 {
 	return camera;
 }
 
-void GameScene::setSkyBox(GLSkyBox * skyBox)
+void BaseGameScene::setSkyBox(GLSkyBox * skyBox)
 {
 	this->skyBox = skyBox;
 }
 
-void GameScene::setPostProcessing(const char * vs, const char * fs)
+void BaseGameScene::setPostProcessing(const char * vs, const char * fs)
 {
 	if (offScreen == NULL) {
 		offScreen = new OffScreenRenderer();
@@ -92,7 +92,7 @@ void GameScene::setPostProcessing(const char * vs, const char * fs)
 	
 }
 
-void GameScene::start()
+void BaseGameScene::start()
 {
 	for (int i = 0; i < MAX_OBJECT_NUM; ++i) {
 		if (objects[i] != NULL) {
@@ -106,7 +106,7 @@ void GameScene::start()
 	}
 }
 
-void GameScene::update(float deltaTime)
+void BaseGameScene::update(float deltaTime)
 {
 	for (int i = 0; i < MAX_OBJECT_NUM; ++i) {
 		if (objects[i] != NULL) {
@@ -120,18 +120,21 @@ void GameScene::update(float deltaTime)
 	}
 }
 
-void GameScene::render()
+void BaseGameScene::render()
 {
 	render(camera->getViewMatrix(), camera->getProjMatrix());
 }
 
-void GameScene::render(glm::mat4 viewMatrix, glm::mat4 projMatrix)
+void BaseGameScene::render(glm::mat4 viewMatrix, glm::mat4 projMatrix)
 {
 	if (offScreen != NULL && postProcessing != NULL && postProcessing->getShader() != NULL) {
 		offScreen->setOffScreen(true);
 	}
-
 	setShaderUniform();
+	if (skyBox != NULL) {
+		skyBox->render(viewMatrix, projMatrix);
+	}
+
 	map<float, int>sorted = getSortedObjByDistance();
 	for (std::map<float, int>::reverse_iterator it = sorted.rbegin(); it != sorted.rend(); ++it) {
 		if (objects[it->second] == NULL) continue;
@@ -141,10 +144,7 @@ void GameScene::render(glm::mat4 viewMatrix, glm::mat4 projMatrix)
 		if (lights[i] == NULL)  continue;
 		lights[i]->render(viewMatrix, projMatrix);
 	}
-	if (skyBox != NULL) {
-		skyBox->render(viewMatrix, projMatrix);
-	}
-
+	
 	if (offScreen != NULL && postProcessing != NULL && postProcessing->getShader() != NULL) {
 		offScreen->setOffScreen(false);
 		postProcessing->setTextureBuffer(offScreen->getTextureBuffer());
@@ -152,10 +152,10 @@ void GameScene::render(glm::mat4 viewMatrix, glm::mat4 projMatrix)
 	}
 }
 
-void GameScene::handleKeyInput(GLFWwindow* window)
+void BaseGameScene::handleKeyInput(GLFWwindow* window)
 {
 	if (camera != NULL) {
-		float cameraSpeed = 0.005f;
+		float cameraSpeed = 0.05f;
 		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 			camera->moveFront(cameraSpeed);
 		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
@@ -165,19 +165,9 @@ void GameScene::handleKeyInput(GLFWwindow* window)
 		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 			camera->moveRight(cameraSpeed);
 	}
-	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
-		setPostProcessing("", "");
-	if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
-		setPostProcessing("postProcessing.vs", "inversion.fs");
-	if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
-		setPostProcessing("postProcessing.vs", "grayScale.fs");
-	if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS)
-		setPostProcessing("postProcessing.vs", "blur.fs");
-	if (glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS)
-		setPostProcessing("postProcessing.vs", "sharpen.fs");
 }
 
-void GameScene::handleMouseMove(double mouseX, double mouseY)
+void BaseGameScene::handleMouseMove(double mouseX, double mouseY)
 {
 	static double lastX = mouseX;
 	static double lastY = mouseY;
@@ -193,7 +183,11 @@ void GameScene::handleMouseMove(double mouseX, double mouseY)
 	lastY = mouseY;
 }
 
-int GameScene::getAvailObjIndex()
+void BaseGameScene::initScene()
+{
+}
+
+int BaseGameScene::getAvailObjIndex()
 {
 	for (int i = 0; i < MAX_OBJECT_NUM; ++i) {
 		if (objects[i] == NULL) {
@@ -203,7 +197,7 @@ int GameScene::getAvailObjIndex()
 	return -1;
 }
 
-int GameScene::getAvailLightIndex()
+int BaseGameScene::getAvailLightIndex()
 {
 	for (int i = 0; i < MAX_LIGHT_NUM; ++i) {
 		if (lights[i] == NULL) {
@@ -213,7 +207,7 @@ int GameScene::getAvailLightIndex()
 	return -1;
 }
 
-map<float, int> GameScene::getSortedObjByDistance()
+map<float, int> BaseGameScene::getSortedObjByDistance()
 {
 	map<float, int> result;
 	for (int i = 0; i < MAX_OBJECT_NUM; ++i) {
@@ -224,7 +218,7 @@ map<float, int> GameScene::getSortedObjByDistance()
 	return result;
 }
 
-void GameScene::setShaderUniform()
+void BaseGameScene::setShaderUniform()
 {
 	int lightCount = 0;
 	GLLightObject* currLights[MAX_LIGHT_NUM];

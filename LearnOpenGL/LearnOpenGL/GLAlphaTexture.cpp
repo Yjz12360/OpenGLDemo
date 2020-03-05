@@ -23,6 +23,7 @@ GLAlphaTexture::GLAlphaTexture(glm::vec3 translation, glm::vec3 rotation, glm::v
 
 void GLAlphaTexture::render(glm::mat4 viewMatrix, glm::mat4 projMatrix)
 {
+	glDisable(GL_CULL_FACE);
 
 	GLObject::render(viewMatrix, projMatrix);
 
@@ -31,6 +32,8 @@ void GLAlphaTexture::render(glm::mat4 viewMatrix, glm::mat4 projMatrix)
 	shader->setInt("texture", 0);
 
 	glDrawElements(GL_TRIANGLES, indexNum, GL_UNSIGNED_INT, 0);
+
+	glEnable(GL_CULL_FACE);
 }
 
 void GLAlphaTexture::initVertexData()

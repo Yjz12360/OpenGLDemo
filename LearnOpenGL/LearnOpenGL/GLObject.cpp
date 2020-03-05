@@ -7,11 +7,12 @@ const glm::vec3 GLObject::defaultScale = glm::vec3(1.0f, 1.0f, 1.0f);
 GLObject::GLObject(glm::vec3 translation, glm::vec3 rotation, glm::vec3 scale)
 {
 	modelMatrix = glm::mat4(1.0f);
+	modelMatrix = glm::translate(modelMatrix, translation);
 	modelMatrix = glm::scale(modelMatrix, glm::vec3(scale));
 	modelMatrix = glm::rotate(modelMatrix, rotation.x, glm::vec3(1.0f, 0.0f, 0.0f));
 	modelMatrix = glm::rotate(modelMatrix, rotation.y, glm::vec3(0.0f, 1.0f, 0.0f));
 	modelMatrix = glm::rotate(modelMatrix, rotation.z, glm::vec3(0.0f, 0.0f, 1.0f));
-	modelMatrix = glm::translate(modelMatrix, translation);
+	
 
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
@@ -25,11 +26,12 @@ GLObject::GLObject(glm::vec3 translation, glm::vec3 rotation, glm::vec3 scale)
 GLObject::GLObject(const char * modelPath, glm::vec3 translation, glm::vec3 rotation, glm::vec3 scale)
 {
 	modelMatrix = glm::mat4(1.0f);
+	modelMatrix = glm::translate(modelMatrix, translation);
 	modelMatrix = glm::scale(modelMatrix, glm::vec3(scale));
 	modelMatrix = glm::rotate(modelMatrix, rotation.x, glm::vec3(1.0f, 0.0f, 0.0f));
 	modelMatrix = glm::rotate(modelMatrix, rotation.y, glm::vec3(0.0f, 1.0f, 0.0f));
 	modelMatrix = glm::rotate(modelMatrix, rotation.z, glm::vec3(0.0f, 0.0f, 1.0f));
-	modelMatrix = glm::translate(modelMatrix, translation);
+	
 
 	loadModel(modelPath);
 }

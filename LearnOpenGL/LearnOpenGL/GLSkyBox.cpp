@@ -49,9 +49,9 @@ void GLSkyBox::initVertexData()
 {
 	vertexData = new float[cubeVertexNum * vertexAttribNum];
 	for (int i = 0; i < cubeVertexNum; ++i) {
-		vertexData[i * vertexAttribNum] = CUBE_VERTEX_DATA(i, PosX) * 1;
-		vertexData[i * vertexAttribNum + 1] = CUBE_VERTEX_DATA(i, PosY) * 1;
-		vertexData[i * vertexAttribNum + 2] = CUBE_VERTEX_DATA(i, PosZ) * 1;
+		vertexData[i * vertexAttribNum] = CUBE_VERTEX_DATA(i, PosX) * 1000;
+		vertexData[i * vertexAttribNum + 1] = CUBE_VERTEX_DATA(i, PosY) * 1000;
+		vertexData[i * vertexAttribNum + 2] = CUBE_VERTEX_DATA(i, PosZ) * 1000;
 	}
 	indexData = new unsigned int[cubeIndexNum];
 	for (int i = 0; i < cubeIndexNum; i+=3) {

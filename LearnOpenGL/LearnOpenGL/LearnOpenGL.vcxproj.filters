@@ -54,9 +54,6 @@
     <ClCompile Include="GLSimpleCube.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="GameScene.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="GLSimpleLight.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -105,6 +102,15 @@
     <ClCompile Include="GLSkyBox.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="BaseGameScene.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DemoGameScene.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Initializer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Shader.h">
@@ -132,9 +138,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="GLSimpleCube.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="GameScene.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="CubeVertexData.h">
@@ -201,6 +204,15 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="GLSkyBox.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DemoGameScene.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseGameScene.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Initializer.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
