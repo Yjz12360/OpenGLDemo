@@ -24,7 +24,7 @@ void GLPostProcessingRect::renderPostProcess()
 {
 	if (shader == NULL)return;
 
-	glDisable(GL_CULL_FACE);
+	//glDisable(GL_CULL_FACE);
 
 	shader->use();
 	glBindVertexArray(VAO);
@@ -36,7 +36,7 @@ void GLPostProcessingRect::renderPostProcess()
 
 	glDrawElements(GL_TRIANGLES, indexNum, GL_UNSIGNED_INT, 0);
 
-	glEnable(GL_CULL_FACE);
+	//glEnable(GL_CULL_FACE);
 }
 
 void GLPostProcessingRect::setTextureBuffer(unsigned int texture)
@@ -55,7 +55,12 @@ void GLPostProcessingRect::initVertexData()
 		vertexData[i * vertexAttribNum + 4] = RECT2D_VERTEX_DATA(i, TexV);
 	}
 	indexData = new unsigned int[rect2DIndexNum];
-	for (int i = 0; i < rect2DIndexNum; ++i) {
+	for (int i = 0; i < rect2DIndexNum; i++) {
 		indexData[i] = RECT2D_INDEX_DATA(i);
 	}
+	/*for (int i = 0; i < rect2DIndexNum; i += 3) {
+		indexData[i] = RECT2D_INDEX_DATA(i);
+		indexData[i + 1] = RECT2D_INDEX_DATA((i + 2));
+		indexData[i + 2] = RECT2D_INDEX_DATA((i + 1));
+	}*/
 }

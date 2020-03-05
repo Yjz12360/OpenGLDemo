@@ -1,7 +1,5 @@
-﻿  main.cpp
-d:\vs2017project\projects\learnopengl3\learnopengl\learnopengl\main.cpp(68): warning C4316: “GLSkyBox”: 在堆上分配的对象可能不是对齐 16
-d:\vs2017project\projects\learnopengl3\learnopengl\learnopengl\main.cpp(78): warning C4316: “GLDirectionLight”: 在堆上分配的对象可能不是对齐 16
-d:\vs2017project\projects\learnopengl3\learnopengl\learnopengl\main.cpp(84): warning C4316: “GLDirectionLight”: 在堆上分配的对象可能不是对齐 16
-d:\vs2017project\projects\learnopengl3\learnopengl\learnopengl\main.cpp(113): warning C4316: “GLObject”: 在堆上分配的对象可能不是对齐 16
-d:\vs2017project\projects\learnopengl3\learnopengl\learnopengl\main.cpp(162): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+﻿  GameScene.cpp
+d:\vs2017project\projects\learnopengl3\learnopengl\learnopengl\gamescene.cpp(87): warning C4316: “GLPostProcessingRect”: 在堆上分配的对象可能不是对齐 16
+d:\vs2017project\projects\learnopengl3\learnopengl\learnopengl\gamescene.cpp(189): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+d:\vs2017project\projects\learnopengl3\learnopengl\learnopengl\gamescene.cpp(190): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
   LearnOpenGL.vcxproj -> D:\VS2017Project\Projects\LearnOpenGL3\LearnOpenGL\Debug\LearnOpenGL.exe

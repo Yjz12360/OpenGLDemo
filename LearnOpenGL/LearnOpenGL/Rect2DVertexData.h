@@ -9,9 +9,9 @@ static const unsigned int rect2DIndexNum = 6;
 
 static const float rect2DVertexData[rect2DVertexNum][rect2DAttribNum] = {
 	 0.5f, 0.5f, 0.0f, 1.0f, 1.0f,
-	 0.5f,-0.5f, 0.0f, 1.0f, 0.0f,
+	-0.5f, 0.5f, 0.0f, 0.0f, 1.0f,
 	-0.5f,-0.5f, 0.0f, 0.0f, 0.0f,
-	-0.5f, 0.5f, 0.0f, 0.0f, 1.0f
+	 0.5f,-0.5f, 0.0f, 1.0f, 0.0f,
 };
 
 static const unsigned int rect2DIndexData[rect2DIndexNum] = {

@@ -122,6 +122,10 @@ void GLObject::setShader(const char * vsPath, const char * fsPath)
 {
 	if (shader != NULL) {
 		delete shader;
+		shader = NULL;
+	}
+	if (vsPath == "" || fsPath == "") {
+		return;
 	}
 	shader = new Shader(vsPath, fsPath);
 }

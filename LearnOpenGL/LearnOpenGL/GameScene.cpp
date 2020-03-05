@@ -127,7 +127,7 @@ void GameScene::render()
 
 void GameScene::render(glm::mat4 viewMatrix, glm::mat4 projMatrix)
 {
-	if (offScreen != NULL) {
+	if (offScreen != NULL && postProcessing != NULL && postProcessing->getShader() != NULL) {
 		offScreen->setOffScreen(true);
 	}
 
@@ -145,7 +145,7 @@ void GameScene::render(glm::mat4 viewMatrix, glm::mat4 projMatrix)
 		skyBox->render(viewMatrix, projMatrix);
 	}
 
-	if (offScreen != NULL and postProcessing != NULL) {
+	if (offScreen != NULL && postProcessing != NULL && postProcessing->getShader() != NULL) {
 		offScreen->setOffScreen(false);
 		postProcessing->setTextureBuffer(offScreen->getTextureBuffer());
 		postProcessing->renderPostProcess();
@@ -165,6 +165,16 @@ void GameScene::handleKeyInput(GLFWwindow* window)
 		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 			camera->moveRight(cameraSpeed);
 	}
+	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
+		setPostProcessing("", "");
+	if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
+		setPostProcessing("postProcessing.vs", "inversion.fs");
+	if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
+		setPostProcessing("postProcessing.vs", "grayScale.fs");
+	if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS)
+		setPostProcessing("postProcessing.vs", "blur.fs");
+	if (glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS)
+		setPostProcessing("postProcessing.vs", "sharpen.fs");
 }
 
 void GameScene::handleMouseMove(double mouseX, double mouseY)
