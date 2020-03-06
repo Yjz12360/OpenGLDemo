@@ -138,10 +138,12 @@ void BaseGameScene::render(glm::mat4 viewMatrix, glm::mat4 projMatrix)
 	map<float, int>sorted = getSortedObjByDistance();
 	for (std::map<float, int>::reverse_iterator it = sorted.rbegin(); it != sorted.rend(); ++it) {
 		if (objects[it->second] == NULL) continue;
+		if (!objects[it->second]->enabled) continue;
 		objects[it->second]->render(viewMatrix, projMatrix);
 	}
 	for (int i = 0; i < MAX_LIGHT_NUM; ++i) {
 		if (lights[i] == NULL)  continue;
+		if (!lights[i]->enabled) continue;
 		lights[i]->render(viewMatrix, projMatrix);
 	}
 	
@@ -227,6 +229,7 @@ void BaseGameScene::setShaderUniform()
 	for (int i = 0; i < MAX_LIGHT_NUM; ++i) {
 		if (lights[i] == NULL) continue;
 		if (lights[i]->getLight() == NULL) continue;
+		if (!lights[i]->enabled)continue;
 		currLights[lightCount] = lights[i];
 		switch (lights[i]->getLightType()) {
 		case Point:shaderLightIndex[lightCount] = point++; break;

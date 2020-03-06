@@ -22,12 +22,10 @@ void GLCubeBorder::render(glm::mat4 viewMatrix, glm::mat4 projMatrix)
 	glStencilFunc(GL_NOTEQUAL, 0x01, 0xFF);
 	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
 
-	glDisable(GL_DEPTH_TEST);
-
 	GLObject::render(viewMatrix, projMatrix);
 	glDrawElements(GL_TRIANGLES, indexNum, GL_UNSIGNED_INT, 0);
 
-	glEnable(GL_DEPTH_TEST);
+	glStencilFunc(GL_ALWAYS, 0x01, 0xFF);
 }
 
 void GLCubeBorder::initVertexData()

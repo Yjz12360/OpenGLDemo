@@ -27,6 +27,7 @@
 #include "OffScreenRenderer.h"
 #include "GLPostProcessingRect.h"
 #include "GLSkyBox.h"
+#include "GLMovingCube.h"
 
 const unsigned int MAX_OBJECT_NUM = 100;
 const unsigned int MAX_CAMERA_NUM = 3;

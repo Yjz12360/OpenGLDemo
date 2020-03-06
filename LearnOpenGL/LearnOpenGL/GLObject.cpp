@@ -80,6 +80,11 @@ void GLObject::translate(glm::vec3 offset)
 	modelMatrix = glm::translate(modelMatrix, offset);
 }
 
+void GLObject::translateTo(glm::vec3 pos)
+{
+	translate(pos - getTranslation());
+}
+
 void GLObject::rotateX(float angle)
 {
 	modelMatrix = glm::rotate(modelMatrix, angle, glm::vec3(1.0f, 0.0f, 0.0f));

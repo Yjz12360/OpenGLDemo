@@ -111,6 +111,9 @@
     <ClCompile Include="Initializer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="GLMovingCube.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Shader.h">
@@ -213,6 +216,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Initializer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GLMovingCube.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

@@ -31,6 +31,7 @@ public:
 	glm::mat4 getProjMatrix();
 
 	glm::vec3 getPos();
+	glm::vec3 getDirection();
 private:
 	void makeRotation(glm::mat4 rotation);
 

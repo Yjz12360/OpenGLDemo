@@ -138,6 +138,7 @@
     <ClCompile Include="GLFrameCube.cpp" />
     <ClCompile Include="GLLightMapCube.cpp" />
     <ClCompile Include="GLLightObject.cpp" />
+    <ClCompile Include="GLMovingCube.cpp" />
     <ClCompile Include="GLObject.cpp" />
     <ClCompile Include="GLPointLight.cpp" />
     <ClCompile Include="GLPostProcessingRect.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="GLFrameCube.h" />
     <ClInclude Include="GLLightMapCube.h" />
     <ClInclude Include="GLLightObject.h" />
+    <ClInclude Include="GLMovingCube.h" />
     <ClInclude Include="GLObject.h" />
     <ClInclude Include="GLPointLight.h" />
     <ClInclude Include="GLPostProcessingRect.h" />

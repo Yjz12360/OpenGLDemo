@@ -92,6 +92,11 @@ glm::vec3 Camera::getPos()
 	return cameraPos;
 }
 
+glm::vec3 Camera::getDirection()
+{
+	return cameraFront;
+}
+
 void Camera::makeRotation(glm::mat4 rotation)
 {
 	glm::vec4 front = glm::vec4(cameraFront, 1.0f);

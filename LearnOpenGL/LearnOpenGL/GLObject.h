@@ -31,6 +31,7 @@ public:
 	virtual void update(float deltaTime);
 
 	void translate(glm::vec3 offset);
+	void translateTo(glm::vec3 pos);
 	void rotateX(float angle);
 	void rotateY(float angle);
 	void rotateZ(float angle);
@@ -38,7 +39,7 @@ public:
 
 	void lookAt(glm::vec3 direction);
 
-	
+	bool enabled = true;
 
 	glm::vec3 getTranslation();
 
