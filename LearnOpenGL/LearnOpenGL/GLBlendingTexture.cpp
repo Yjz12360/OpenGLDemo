@@ -7,7 +7,7 @@ GLBlendingTexture::GLBlendingTexture(glm::vec3 translation, glm::vec3 rotation, 
 	:GLObject(translation, rotation, scale)
 {
 	TextureLoader::setWrap(GL_CLAMP_TO_EDGE);
-	TextureLoader::loadTexture(texture, "Resource/Texture/blending_transparent_window.png");
+	TextureLoader::loadTexture(texture, "blending_transparent_window.png");
 
 	glBufferData(GL_ARRAY_BUFFER, vertexDataSize, vertexData, GL_STATIC_DRAW);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexDataSize, indexData, GL_STATIC_DRAW);

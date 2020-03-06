@@ -6,7 +6,7 @@ unsigned int* GLPostProcessingRect::indexData = NULL;
 GLPostProcessingRect::GLPostProcessingRect(const char * vsPath, const char * fsPath)
 	:GLObject()
 {
-	TextureLoader::loadTexture(texture, "Resource/Texture/untitled.png");
+	TextureLoader::loadTexture(texture, "untitled.png");
 
 	glBufferData(GL_ARRAY_BUFFER, vertexDataSize, vertexData, GL_STATIC_DRAW);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexDataSize, indexData, GL_STATIC_DRAW);

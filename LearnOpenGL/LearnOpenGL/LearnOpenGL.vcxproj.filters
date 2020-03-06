@@ -313,6 +313,96 @@
     <None Include="refraction.fs">
       <Filter>资源文件\fShader</Filter>
     </None>
+    <None Include="Resource\Shader\VShader\alphaTexture.vs">
+      <Filter>资源文件\vShader</Filter>
+    </None>
+    <None Include="Resource\Shader\VShader\blendingTexture.vs">
+      <Filter>资源文件\vShader</Filter>
+    </None>
+    <None Include="Resource\Shader\VShader\border.vs">
+      <Filter>资源文件\vShader</Filter>
+    </None>
+    <None Include="Resource\Shader\VShader\lightMap.vs">
+      <Filter>资源文件\vShader</Filter>
+    </None>
+    <None Include="Resource\Shader\VShader\postProcessing.vs">
+      <Filter>资源文件\vShader</Filter>
+    </None>
+    <None Include="Resource\Shader\VShader\reflection.vs">
+      <Filter>资源文件\vShader</Filter>
+    </None>
+    <None Include="Resource\Shader\VShader\refraction.vs">
+      <Filter>资源文件\vShader</Filter>
+    </None>
+    <None Include="Resource\Shader\VShader\shader.vs">
+      <Filter>资源文件\vShader</Filter>
+    </None>
+    <None Include="Resource\Shader\VShader\simpleCube.vs">
+      <Filter>资源文件\vShader</Filter>
+    </None>
+    <None Include="Resource\Shader\VShader\simpleLight.vs">
+      <Filter>资源文件\vShader</Filter>
+    </None>
+    <None Include="Resource\Shader\VShader\simpleMaterial.vs">
+      <Filter>资源文件\vShader</Filter>
+    </None>
+    <None Include="Resource\Shader\VShader\simpleTex.vs">
+      <Filter>资源文件\vShader</Filter>
+    </None>
+    <None Include="Resource\Shader\VShader\skybox.vs">
+      <Filter>资源文件\vShader</Filter>
+    </None>
+    <None Include="Resource\Shader\FShader\alphaTexture.fs">
+      <Filter>资源文件\fShader</Filter>
+    </None>
+    <None Include="Resource\Shader\FShader\blendingTexture.fs">
+      <Filter>资源文件\fShader</Filter>
+    </None>
+    <None Include="Resource\Shader\FShader\blur.fs">
+      <Filter>资源文件\fShader</Filter>
+    </None>
+    <None Include="Resource\Shader\FShader\border.fs">
+      <Filter>资源文件\fShader</Filter>
+    </None>
+    <None Include="Resource\Shader\FShader\edgeDetection.fs">
+      <Filter>资源文件\fShader</Filter>
+    </None>
+    <None Include="Resource\Shader\FShader\grayScale.fs">
+      <Filter>资源文件\fShader</Filter>
+    </None>
+    <None Include="Resource\Shader\FShader\inversion.fs">
+      <Filter>资源文件\fShader</Filter>
+    </None>
+    <None Include="Resource\Shader\FShader\lightMap.fs">
+      <Filter>资源文件\fShader</Filter>
+    </None>
+    <None Include="Resource\Shader\FShader\reflection.fs">
+      <Filter>资源文件\fShader</Filter>
+    </None>
+    <None Include="Resource\Shader\FShader\refraction.fs">
+      <Filter>资源文件\fShader</Filter>
+    </None>
+    <None Include="Resource\Shader\FShader\shader.fs">
+      <Filter>资源文件\fShader</Filter>
+    </None>
+    <None Include="Resource\Shader\FShader\sharpen.fs">
+      <Filter>资源文件\fShader</Filter>
+    </None>
+    <None Include="Resource\Shader\FShader\simpleCube.fs">
+      <Filter>资源文件\fShader</Filter>
+    </None>
+    <None Include="Resource\Shader\FShader\simpleLight.fs">
+      <Filter>资源文件\fShader</Filter>
+    </None>
+    <None Include="Resource\Shader\FShader\simpleMaterial.fs">
+      <Filter>资源文件\fShader</Filter>
+    </None>
+    <None Include="Resource\Shader\FShader\simpleTex.fs">
+      <Filter>资源文件\fShader</Filter>
+    </None>
+    <None Include="Resource\Shader\FShader\skybox.fs">
+      <Filter>资源文件\fShader</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="tex.jpg">

@@ -21,12 +21,12 @@ void DemoGameScene::initScene()
 	pointLight->setSpecular(glm::vec3(0.5f));
 	addLight(pointLight);
 
-	GLObject* reflectionModel = new GLObject("Resource/Model/nanosuit/nanosuit.obj",
+	GLObject* reflectionModel = new GLObject("nanosuit/nanosuit.obj",
 		glm::vec3(0.0f, -10.0f, 15.0f), glm::vec3(0.0f, glm::radians(180.0f),0.0f));
 	reflectionModel->setShader("reflection.vs", "reflection.fs");
 	addObject(reflectionModel);
 
-	GLObject* refractionModel = new GLObject("Resource/Model/nanosuit/nanosuit.obj",
+	GLObject* refractionModel = new GLObject("nanosuit/nanosuit.obj",
 		glm::vec3(0.0f, -10.0f, -15.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 	refractionModel->setShader("refraction.vs", "refraction.fs");
 	addObject(refractionModel);

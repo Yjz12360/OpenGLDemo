@@ -7,10 +7,15 @@ unsigned int TextureLoader::maxFilter = GL_LINEAR;
 
 void TextureLoader::loadTexture(unsigned int & texture, std::string path)
 {
-	loadTexture(texture, path.c_str());
+	load(texture, (TexturePath + path).c_str());
 }
 
-void TextureLoader::loadTexture(unsigned int & texture, const char * path)
+void TextureLoader::loadModelTexture(unsigned int & texture, std::string path)
+{
+	load(texture, (ModelPath + path).c_str());
+}
+
+void TextureLoader::load(unsigned int & texture, const char * path)
 {
 	stbi_set_flip_vertically_on_load(true);
 	int width, height, nrChannels;
@@ -38,10 +43,11 @@ void TextureLoader::loadTexture(unsigned int & texture, const char * path)
 	stbi_image_free(data);
 }
 
+
+
 void TextureLoader::loadCubeTexture(unsigned int & texture, std::string path)
 {
 	stbi_set_flip_vertically_on_load(false);
-	std::string dictionary = "Resource/CubeTexture/";
 	std::vector<std::string> faces{
 		"right.jpg","left.jpg","top.jpg","bottom.jpg","front.jpg","back.jpg"
 	};
@@ -51,7 +57,7 @@ void TextureLoader::loadCubeTexture(unsigned int & texture, std::string path)
 
 	int width, height, nrChannels;
 	for (unsigned int i = 0; i < faces.size(); i++) {
-		std::string imagePath = dictionary + path + "/" + faces[i];
+		std::string imagePath = CubeTexturePath + path + "/" + faces[i];
 		unsigned char *data = stbi_load(imagePath.c_str(), &width, &height, &nrChannels, 0);
 		if (data) {
 			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, 

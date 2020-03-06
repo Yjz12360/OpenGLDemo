@@ -3,6 +3,7 @@
 #ifndef SHADER_H
 #define SHADER_H
 
+#include "Config.h"
 
 #include <glad/glad.h>
 
@@ -27,8 +28,8 @@ public:
 		vShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 		fShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 		try {
-			vShaderFile.open(vertexPath);
-			fShaderFile.open(fragmentPath);
+			vShaderFile.open(VShaderPath + vertexPath);
+			fShaderFile.open(FShaderPath + fragmentPath);
 			std::stringstream vShaderStream, fShaderStream;
 			vShaderStream << vShaderFile.rdbuf();
 			fShaderStream << fShaderFile.rdbuf();

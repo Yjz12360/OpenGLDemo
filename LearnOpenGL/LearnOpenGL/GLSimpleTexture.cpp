@@ -15,9 +15,9 @@ static unsigned int texIndices[] = {
 GLSimpleTexture::GLSimpleTexture()
 {
 	TextureLoader::setWrap(GL_MIRRORED_REPEAT);
-	TextureLoader::loadTexture(texture1, "Resource/Texture/untitled.png");
+	TextureLoader::loadTexture(texture1, "untitled.png");
 	TextureLoader::setWrap(GL_REPEAT);
-	TextureLoader::loadTexture(texture2, "Resource/Texture/untitled.png");
+	TextureLoader::loadTexture(texture2, "untitled.png");
 
 	glBufferData(GL_ARRAY_BUFFER, sizeof(texVertices), texVertices, GL_STATIC_DRAW);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(texIndices), texIndices, GL_STATIC_DRAW);

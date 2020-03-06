@@ -8,7 +8,7 @@ GLAlphaTexture::GLAlphaTexture(glm::vec3 translation, glm::vec3 rotation, glm::v
 {
 
 	TextureLoader::setWrap(GL_CLAMP_TO_EDGE);
-	TextureLoader::loadTexture(texture, "Resource/Texture/grass.png");
+	TextureLoader::loadTexture(texture, "grass.png");
 
 	glBufferData(GL_ARRAY_BUFFER, vertexDataSize, vertexData, GL_STATIC_DRAW);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexDataSize, indexData, GL_STATIC_DRAW);
